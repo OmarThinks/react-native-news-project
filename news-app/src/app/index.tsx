@@ -2,6 +2,7 @@ import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
 import { Header } from "@/components/Views/Header";
 import NewsCard from "@/components/cards/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
+import { NewsItemType } from "@/types/NewsItemType";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FlatList, View } from "react-native";
@@ -30,6 +31,8 @@ function Index() {
     },
   });
 
+  const loadedItems = newsItems.filter((item) => item != null);
+
   //console.log({ isLoading, isFetching, data, isError, error, status });
   //console.log(JSON.stringify(newsItems, null, 2));
 
@@ -41,7 +44,7 @@ function Index() {
     if (!data) return;
 
     const now = Date.now();
-    if (now - lastNextPageTriggerTime < 1000 * 2) {
+    if (now - lastNextPageTriggerTime < 1000) {
       // Prevent triggering next page multiple times within 2 seconds
       return;
     }
@@ -58,16 +61,18 @@ function Index() {
     >
       <Header title="Top News" />
       <FlatList
-        data={newsItems}
-        renderItem={({ item }) => <NewsCard newsItem={item} key={item?.id} />}
-        keyExtractor={(item, index) =>
-          item?.id?.toString?.() ?? index.toString()
-        }
+        data={loadedItems}
+        renderItem={({ item }) => <NewsCard newsItem={item} />}
+        keyExtractor={(item) => item?.id?.toString?.()}
         onEndReached={nextPage}
         onEndReachedThreshold={0.5}
       />
     </View>
   );
 }
+
+const RenderItemComponent = ({ item }: { item: NewsItemType }) => {
+  return <NewsCard newsItem={item} />;
+};
 
 export default Index;
