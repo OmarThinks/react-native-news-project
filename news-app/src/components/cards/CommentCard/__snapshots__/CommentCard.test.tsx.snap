@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentCard renders comment with HTML entities correctly 1`] = `
+<View
+  className="p-4 m-2 rounded-lg shadow-sm"
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+    }
+  }
+>
+  <Text
+    className="text-base mb-2 leading-5"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    This is a comment with 'single quotes' and 
+
+paragraphs
+  </Text>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        123456
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`CommentCard renders long comment correctly 1`] = `
+<View
+  className="p-4 m-2 rounded-lg shadow-sm"
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+    }
+  }
+>
+  <Text
+    className="text-base mb-2 leading-5"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      className="text-sm font-semibold mb-3"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      Show More
+    </Text>
+  </View>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        123456
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`CommentCard renders short comment correctly 1`] = `
+<View
+  className="p-4 m-2 rounded-lg shadow-sm"
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+    }
+  }
+>
+  <Text
+    className="text-base mb-2 leading-5"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    This is a short comment.
+  </Text>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        123456
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;
