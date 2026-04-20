@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 
@@ -8,6 +8,14 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType | undefined }) => {
   if (!newsItem) {
     return null;
   }
+
+  /*
+  useEffect(() => {
+    console.log("NewsCard rendered for id:", newsItem.id);
+    return () => {
+      console.log("NewsCard unmounted for id:", newsItem.id);
+    };
+  }, [newsItem.id]);*/
 
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000);
