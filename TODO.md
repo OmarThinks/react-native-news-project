@@ -3,6 +3,8 @@
 ✅
 
 - testing ✅
-- Auth (convex)
+- Auth (firebase auth)
+- obufiscation
+- iOS
 - docs
 - video

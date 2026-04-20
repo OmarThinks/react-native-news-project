@@ -1,13 +1,30 @@
+import { setUser } from "@/redux/slices/auth/authSlice";
 import { setThemeMode } from "@/redux/slices/themeSlice/themeSlice";
 import { useAppDispatch } from "@/redux/store";
 import { StorageKeysEnum } from "@/storage/StorageKeysEnum";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  FirebaseAuthTypes,
+  getAuth,
+  onAuthStateChanged,
+} from "@react-native-firebase/auth";
 import { useEffect, useState } from "react";
 
 const useIsAppInitialized = () => {
   const [isThemeInitialized, setIsThemeInitialized] = useState(false);
+  const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  function handleAuthStateChanged(user: FirebaseAuthTypes.User | null) {
+    dispatch(setUser(user));
+    if (isAuthInitialized) setIsAuthInitialized(false);
+  }
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
   useEffect(() => {
     const initializeTheme = async () => {
@@ -28,7 +45,7 @@ const useIsAppInitialized = () => {
     initializeTheme();
   }, []);
 
-  const isAppInitialized = isThemeInitialized;
+  const isAppInitialized = isThemeInitialized && isAuthInitialized;
 
   return isAppInitialized;
 };
