@@ -6,15 +6,11 @@ export default function Index() {
 
   return (
     <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: colors.background,
-      }}
+      className="flex-1 items-center justify-center"
+      style={{ backgroundColor: colors.background, flex: 1 }}
     >
-      <Text style={{ color: colors.text, fontSize: 18, fontWeight: "bold" }}>
-        Edit src/app/index.tsx to edit this screen.
+      <Text className="text-xl font-bold" style={{ color: colors.text }}>
+        Welcome to Nativewind!
       </Text>
     </View>
   );
