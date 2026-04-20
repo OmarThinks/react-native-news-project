@@ -1,17 +1,13 @@
 import { useIsAppInitialized } from "@/hooks/useIsAppInitialized";
 import { useColors, useThemeMode } from "@/redux/slices/themeSlice/colorsHooks";
 import { store } from "@/redux/store";
+import "@/utils/ReactQueryReactNativeSetup";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider as ReduxProvider } from "react-redux";
 import "../../global.css";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 
 function RootLayout() {
   return (
