@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { CommentItemType } from "@/types/CommentItemType";
 
 const CommentCard = ({ commentItem }: { commentItem: CommentItemType }) => {
   const colors = useColors();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const CHARACTER_LIMIT = 300;
 
   if (!commentItem) {
     return null;
@@ -24,7 +26,14 @@ const CommentCard = ({ commentItem }: { commentItem: CommentItemType }) => {
 
   const cleanText = commentItem.text
     .replace(/<p>/g, "\n\n")
-    .replace(/<\/p>/g, "");
+    .replace(/<\/p>/g, "")
+    .replace(/&#x27;/g, "'")
+    .trim();
+
+  const isLongComment = cleanText.length > CHARACTER_LIMIT;
+  const displayText = isExpanded
+    ? cleanText
+    : cleanText.substring(0, CHARACTER_LIMIT) + (isLongComment ? "..." : "");
 
   return (
     <View
@@ -32,8 +41,18 @@ const CommentCard = ({ commentItem }: { commentItem: CommentItemType }) => {
       style={{ backgroundColor: colors.surface, borderColor: colors.border }}
     >
       <Text className="text-base mb-2 leading-5" style={{ color: colors.text }}>
-        {cleanText}
+        {displayText}
       </Text>
+      {isLongComment && (
+        <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+          <Text
+            className="text-sm font-semibold mb-3"
+            style={{ color: colors.textSecondary }}
+          >
+            {isExpanded ? "Show Less" : "Show More"}
+          </Text>
+        </TouchableOpacity>
+      )}
       <View className="flex-row justify-between items-center">
         <Text className="text-sm" style={{ color: colors.textSecondary }}>
           by {commentItem.by}

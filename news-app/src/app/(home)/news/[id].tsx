@@ -30,26 +30,10 @@ const NewsDetailsScreen = () => {
     JSON.stringify(data, null, 2),
   );
 
-  /*
-  example data:
-  {
-  "by": "rao-v",
-  "id": 47829343,
-  "kids": [
-    47839091
-  ],
-  "parent": 47808956,
-  "text": "I don’t really think this reflects the current era of challenges?<p>The “enforcement layer” is the hardest and most important part, and is barely addressed.<p>- is the answer structurally &#x2F; syntactically valid?<p>- is it appropriately grounded and evidenced?<p>- is it accurate? In what ways does it fall short?<p>Each of these should be triggering an agent to rework and resubmit etc. or failing that a disclosure to the user about how the answer falls short and should be reviewed &#x2F; remediated.<p>This feels like it’s from the era of trying to oneshot a good enough answer.",
-  "time": 1776648396,
-  "type": "comment"
-}
-  
-  */
-
   const colors = useColors();
 
   // getting the kids news
-  const { data: kidNews, pending: kidNewsPending } = useQueries({
+  const { data: _comments, pending: commentsPending } = useQueries({
     queries:
       data?.kids.map((kidId) => ({
         queryKey: ["news-item", kidId],
@@ -63,7 +47,9 @@ const NewsDetailsScreen = () => {
     },
   });
 
-  console.log("kidNews", JSON.stringify(kidNews, null, 2));
+  const comments = _comments.filter((item) => item != null);
+
+  console.log("kidNews", JSON.stringify(comments, null, 2));
 
   const handleOpenURL = async (url: string) => {
     try {
@@ -172,7 +158,7 @@ const NewsDetailsScreen = () => {
       )}
 
       {/* Related News/Comments Section */}
-      {kidNews && kidNews.length > 0 && (
+      {comments && comments.length > 0 && (
         <View>
           <Text
             style={{
@@ -182,10 +168,10 @@ const NewsDetailsScreen = () => {
               marginBottom: 12,
             }}
           >
-            Related Discussion ({kidNews.length})
+            Related Discussion ({comments.length})
           </Text>
 
-          {kidNewsPending && (
+          {commentsPending && (
             <View
               style={{
                 justifyContent: "center",
@@ -198,7 +184,7 @@ const NewsDetailsScreen = () => {
           )}
 
           <View style={{ gap: 12 }}>
-            {kidNews.map(
+            {comments.map(
               (item, index) =>
                 item && (
                   <CommentCard key={`${item.id}-${index}`} commentItem={item} />
