@@ -16,8 +16,6 @@ function Index() {
     queryFn: getAllTopNewsQueryFn,
   });
 
-  console.log("data", JSON.stringify(data, null, 2));
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data: newsItems = [], pending } = useQueries({
@@ -35,8 +33,6 @@ function Index() {
   });
 
   const loadedItems = newsItems.filter((item) => item != null);
-
-  console.log("loadedItems", JSON.stringify(loadedItems, null, 2));
 
   const [lastNextPageTriggerTime, setLastNextPageTriggerTime] = useState(0);
 

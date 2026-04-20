@@ -15,6 +15,7 @@ import NewsCard from "@/components/cards/NewsCard";
 import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
 import CommentCard from "@/components/cards/CommentCard";
+import { Header } from "@/components/Views/Header";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -22,13 +23,6 @@ const NewsDetailsScreen = () => {
     queryKey: ["news-item", id],
     queryFn: () => getNewsByIdQueryFn<NewsItemType>(Number(id)),
   });
-
-  console.log(
-    "NewsDetailsScreen rendered with id:",
-    id,
-    "data:",
-    JSON.stringify(data, null, 2),
-  );
 
   const colors = useColors();
 
@@ -49,7 +43,6 @@ const NewsDetailsScreen = () => {
 
   const comments = _comments.filter((item) => item != null);
 
-  console.log("kidNews", JSON.stringify(comments, null, 2));
 
   const handleOpenURL = async (url: string) => {
     try {
@@ -79,121 +72,130 @@ const NewsDetailsScreen = () => {
   }
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
+    <View
+      className=" flex-1 self-stretch"
+      style={{ backgroundColor: colors.background }}
     >
-      {/* Main Article Title */}
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: "bold",
-          color: colors.text,
-          marginBottom: 16,
-          lineHeight: 32,
-        }}
+      <Header title="News Details" shouldHideBackButton={false} />
+      <ScrollView
+        style={{ flex: 1, backgroundColor: colors.background }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
       >
-        {data.title}
-      </Text>
+        {/* Main Article Title */}
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "bold",
+            color: colors.text,
+            marginBottom: 16,
+            lineHeight: 32,
+          }}
+        >
+          {data.title}
+        </Text>
 
-      {/* Article Metadata */}
-      <View
-        style={{
-          backgroundColor: colors.card || colors.background,
-          borderRadius: 8,
-          padding: 12,
-          marginBottom: 16,
-          borderWidth: 1,
-          borderColor: colors.border || "transparent",
-        }}
-      >
-        <View style={{ marginBottom: 8 }}>
-          <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
-            By <Text style={{ fontWeight: "600" }}>{data.by}</Text>
-          </Text>
-        </View>
-
+        {/* Article Metadata */}
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 8,
-          }}
-        >
-          <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
-            ⬆️ Score: {data.score}
-          </Text>
-          <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
-            💬 Comments: {data.descendants}
-          </Text>
-        </View>
-
-        <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
-          📅 {formatDate(data.time)}
-        </Text>
-      </View>
-
-      {/* URL Link */}
-      {data.url && (
-        <TouchableOpacity
-          onPress={() => handleOpenURL(data.url)}
-          style={{
-            backgroundColor: colors.primary,
+            backgroundColor: colors.background,
             borderRadius: 8,
             padding: 12,
-            marginBottom: 24,
+            marginBottom: 16,
+            borderWidth: 1,
+            borderColor: colors.border || "transparent",
           }}
         >
-          <Text
+          <View style={{ marginBottom: 8 }}>
+            <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
+              By <Text style={{ fontWeight: "600" }}>{data.by}</Text>
+            </Text>
+          </View>
+
+          <View
             style={{
-              color: "white",
-              fontWeight: "600",
-              textAlign: "center",
-              fontSize: 14,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: 8,
             }}
           >
-            Read Full Article →
-          </Text>
-        </TouchableOpacity>
-      )}
+            <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
+              ⬆️ Score: {data.score}
+            </Text>
+            <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
+              💬 Comments: {data.descendants}
+            </Text>
+          </View>
 
-      {/* Related News/Comments Section */}
-      {comments && comments.length > 0 && (
-        <View>
-          <Text
+          <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
+            📅 {formatDate(data.time)}
+          </Text>
+        </View>
+
+        {/* URL Link */}
+        {data.url && (
+          <TouchableOpacity
+            onPress={() => handleOpenURL(data.url)}
             style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: colors.text,
-              marginBottom: 12,
+              backgroundColor: colors.primary,
+              borderRadius: 8,
+              padding: 12,
+              marginBottom: 24,
             }}
           >
-            Related Discussion ({comments.length})
-          </Text>
-
-          {commentsPending && (
-            <View
+            <Text
               style={{
-                justifyContent: "center",
-                alignItems: "center",
-                paddingVertical: 16,
+                color: "white",
+                fontWeight: "600",
+                textAlign: "center",
+                fontSize: 14,
               }}
             >
-              <ActivityIndicator color={colors.primary} />
-            </View>
-          )}
+              Read Full Article →
+            </Text>
+          </TouchableOpacity>
+        )}
 
-          <View style={{ gap: 12 }}>
-            {comments.map(
-              (item, index) =>
-                item && (
-                  <CommentCard key={`${item.id}-${index}`} commentItem={item} />
-                ),
+        {/* Related News/Comments Section */}
+        {comments && comments.length > 0 && (
+          <View>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: colors.text,
+                marginBottom: 12,
+              }}
+            >
+              Related Discussion ({comments.length})
+            </Text>
+
+            {commentsPending && (
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingVertical: 16,
+                }}
+              >
+                <ActivityIndicator color={colors.primary} />
+              </View>
             )}
+
+            <View style={{ gap: 12 }}>
+              {comments.map(
+                (item) =>
+                  item && (
+                    <CommentCard
+                      key={`${item.id}`}
+                      commentItem={item}
+                    />
+                  ),
+              )}
+            </View>
           </View>
-        </View>
-      )}
-    </ScrollView>
+        )}
+      </ScrollView>
+    </View>
   );
 };
 
