@@ -1,9 +1,21 @@
-import { Text, View, StyleSheet } from "react-native";
+import { useColors } from "@/colors/useColors";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
+  const colors = useColors();
+
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: colors.background,
+      }}
+    >
+      <Text style={{ color: colors.text, fontSize: 18, fontWeight: "bold" }}>
+        Edit src/app/index.tsx to edit this screen.
+      </Text>
     </View>
   );
 }
