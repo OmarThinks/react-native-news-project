@@ -4,8 +4,8 @@ import NewsCard from "@/components/cards/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { FlatList, View } from "react-native";
+import { memo, useCallback, useState } from "react";
+import { ActivityIndicator, FlatList, View } from "react-native";
 
 function Index() {
   const colors = useColors();
@@ -17,7 +17,7 @@ function Index() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: newsItems = [] } = useQueries({
+  const { data: newsItems = [], pending } = useQueries({
     queries:
       data?.slice(0, 20 * currentPage).map((id) => ({
         queryKey: ["news-item", id],
@@ -33,26 +33,26 @@ function Index() {
 
   const loadedItems = newsItems.filter((item) => item != null);
 
-  //console.log({ isLoading, isFetching, data, isError, error, status });
-  //console.log(JSON.stringify(newsItems, null, 2));
-
-  console.log(currentPage, newsItems.length, data?.length);
-
   const [lastNextPageTriggerTime, setLastNextPageTriggerTime] = useState(0);
 
-  const nextPage = () => {
+  const nextPage = useCallback(() => {
     if (!data) return;
 
     const now = Date.now();
     if (now - lastNextPageTriggerTime < 1000) {
-      // Prevent triggering next page multiple times within 2 seconds
+      // Prevent triggering next page multiple times within 1 second
       return;
     }
     if (newsItems.length < data.length) {
       setLastNextPageTriggerTime(now);
       setCurrentPage((prev) => prev + 1);
     }
-  };
+  }, [data, newsItems.length, lastNextPageTriggerTime]);
+
+  const renderNewsCard = useCallback(
+    ({ item }: { item: NewsItemType }) => <NewsCard newsItem={item} />,
+    [],
+  );
 
   return (
     <View
@@ -62,17 +62,20 @@ function Index() {
       <Header title="Top News" />
       <FlatList
         data={loadedItems}
-        renderItem={({ item }) => <NewsCard newsItem={item} />}
+        renderItem={renderNewsCard}
         keyExtractor={(item) => item?.id?.toString?.()}
         onEndReached={nextPage}
         onEndReachedThreshold={0.5}
+        ListFooterComponent={
+          isFetching ? (
+            <View className="p-4">
+              <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : null
+        }
       />
     </View>
   );
 }
-
-const RenderItemComponent = ({ item }: { item: NewsItemType }) => {
-  return <NewsCard newsItem={item} />;
-};
 
 export default Index;
