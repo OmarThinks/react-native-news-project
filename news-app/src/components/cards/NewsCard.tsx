@@ -4,7 +4,7 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { router } from "expo-router";
 
-const NewsCard = ({ newsItem }: { newsItem: NewsItemType | undefined }) => {
+const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
   const colors = useColors();
   if (!newsItem) {
     return null;
