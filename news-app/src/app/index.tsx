@@ -7,10 +7,10 @@ export default function Index() {
   return (
     <View
       className="flex-1 items-center justify-center"
-      style={{ backgroundColor: colors.background, flex: 1 }}
+      style={{ backgroundColor: colors.background }}
     >
       <Text className="text-xl font-bold" style={{ color: colors.text }}>
-        Welcome to Nativewind!
+        Welcome to our News App!
       </Text>
     </View>
   );
