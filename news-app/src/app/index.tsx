@@ -1,7 +1,7 @@
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
-export default function Index() {
+function Index() {
   const colors = useColors();
 
   return (
@@ -16,10 +16,4 @@ export default function Index() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default Index;

@@ -1,0 +1,4 @@
+{
+  "plugins": ["@tanstack/eslint-plugin-query"],
+  "extends": ["plugin:@tanstack/eslint-plugin-query/recommended"]
+}
