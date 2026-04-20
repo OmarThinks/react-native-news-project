@@ -1,4 +1,4 @@
-import { useColors } from "@/colors/useColors";
+import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {

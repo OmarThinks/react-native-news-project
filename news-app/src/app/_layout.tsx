@@ -1,4 +1,4 @@
-import { useColors } from "@/colors/useColors";
+import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { store } from "@/redux/store";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { Provider as ReduxProvider } from "react-redux";
