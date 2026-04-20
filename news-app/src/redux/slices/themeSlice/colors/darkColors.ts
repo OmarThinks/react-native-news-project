@@ -5,8 +5,8 @@ const darkColors: ThemeColorsType = {
   secondary: "#818CF8",
   background: "#09090B",
   surface: "#18181B",
-  text: "#FAFAFA",
-  textSecondary: "#94A3B8",
+  text: "#FFFFFF",
+  textSecondary: "#F0F0F0",
   border: "#27272A",
   error: "#F87171",
 };

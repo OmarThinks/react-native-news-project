@@ -5,8 +5,8 @@ const lightColors: ThemeColorsType = {
   secondary: "#4F46E5",
   background: "#FFFFFF",
   surface: "#F4F4F5",
-  text: "#18181B",
-  textSecondary: "#64748B",
+  text: "#000000",
+  textSecondary: "#F0F0F0",
   border: "#E4E4E7",
   error: "#EF4444",
 };

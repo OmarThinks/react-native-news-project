@@ -6,8 +6,8 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 
 function Header({
   title,
-  shouldHideSettings = false,
-  shouldHideBackButton = false,
+  shouldHideSettings = true,
+  shouldHideBackButton = true,
 }: {
   title: string;
   shouldHideSettings?: boolean;
@@ -32,14 +32,18 @@ function Header({
         <TouchableOpacity
           className=" rounded-full self-stretch aspect-square justify-center items-center border"
           onPress={back}
-          style={{ borderColor: colors.text }}
+          style={{ borderColor: colors.textSecondary }}
         >
-          <FontAwesome6 name="chevron-left" size={24} color={colors.text} />
+          <FontAwesome6
+            name="chevron-left"
+            size={24}
+            color={colors.textSecondary}
+          />
         </TouchableOpacity>
       )}
 
       <Text
-        style={{ color: colors.text }}
+        style={{ color: colors.textSecondary }}
         className="flex-1 text-[24px] font-bold"
       >
         {title}
@@ -51,9 +55,9 @@ function Header({
           onPress={() => {
             router.navigate("/settings");
           }}
-          style={{ borderColor: colors.text }}
+          style={{ borderColor: colors.textSecondary }}
         >
-          <FontAwesome6 name="gear" size={24} color={colors.text} />
+          <FontAwesome6 name="gear" size={24} color={colors.textSecondary} />
         </TouchableOpacity>
       )}
     </View>
