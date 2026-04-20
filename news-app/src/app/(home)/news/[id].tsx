@@ -14,7 +14,7 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import NewsCard from "@/components/cards/NewsCard";
 import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
-import CommentCard from "@/components/cards/CommentCard";
+import CommentCard from "@/components/cards/CommentCard/CommentCard";
 import { Header } from "@/components/Views/Header";
 
 const NewsDetailsScreen = () => {
@@ -42,7 +42,6 @@ const NewsDetailsScreen = () => {
   });
 
   const comments = _comments.filter((item) => item != null);
-
 
   const handleOpenURL = async (url: string) => {
     try {
@@ -184,12 +183,7 @@ const NewsDetailsScreen = () => {
             <View style={{ gap: 12 }}>
               {comments.map(
                 (item) =>
-                  item && (
-                    <CommentCard
-                      key={`${item.id}`}
-                      commentItem={item}
-                    />
-                  ),
+                  item && <CommentCard key={`${item.id}`} commentItem={item} />,
               )}
             </View>
           </View>
