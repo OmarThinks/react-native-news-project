@@ -12,12 +12,14 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { getNewsByIdQueryFn } from "@/api/newsApi";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import NewsCard from "@/components/cards/NewsCard";
+import { NewsItemType } from "@/types/NewsItemType";
+import { CommentItemType } from "@/types/CommentItemType";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data } = useQuery({
     queryKey: ["news-item", id],
-    queryFn: () => getNewsByIdQueryFn(Number(id)),
+    queryFn: () => getNewsByIdQueryFn<NewsItemType>(Number(id)),
   });
 
   console.log(
@@ -50,7 +52,7 @@ const NewsDetailsScreen = () => {
     queries:
       data?.kids.map((kidId) => ({
         queryKey: ["news-item", kidId],
-        queryFn: () => getNewsByIdQueryFn(kidId),
+        queryFn: () => getNewsByIdQueryFn<CommentItemType>(kidId),
       })) ?? [],
     combine: (results) => {
       return {
@@ -59,6 +61,8 @@ const NewsDetailsScreen = () => {
       };
     },
   });
+
+  console.log("kidNews", JSON.stringify(kidNews, null, 2));
 
   const handleOpenURL = async (url: string) => {
     try {

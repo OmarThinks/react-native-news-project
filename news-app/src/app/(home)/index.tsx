@@ -16,13 +16,15 @@ function Index() {
     queryFn: getAllTopNewsQueryFn,
   });
 
+  console.log("data", JSON.stringify(data, null, 2));
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data: newsItems = [], pending } = useQueries({
     queries:
       data?.slice(0, 20 * currentPage).map((id) => ({
         queryKey: ["news-item", id],
-        queryFn: () => getNewsByIdQueryFn(id),
+        queryFn: () => getNewsByIdQueryFn<NewsItemType>(id),
       })) ?? [],
     combine: (results) => {
       return {
@@ -33,6 +35,8 @@ function Index() {
   });
 
   const loadedItems = newsItems.filter((item) => item != null);
+
+  console.log("loadedItems", JSON.stringify(loadedItems, null, 2));
 
   const [lastNextPageTriggerTime, setLastNextPageTriggerTime] = useState(0);
 
