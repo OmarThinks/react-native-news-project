@@ -1,7 +1,7 @@
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { Text, View } from "react-native";
-import { getAllTopNewsQueryFn } from "@/api/newsApi";
-import { useQuery } from "@tanstack/react-query";
+import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
+import { useQuery, useQueries } from "@tanstack/react-query";
 
 function Index() {
   const colors = useColors();
@@ -11,7 +11,22 @@ function Index() {
     queryFn: getAllTopNewsQueryFn,
   });
 
+  const { data: newsItems } = useQueries({
+    queries:
+      data?.slice(0, 10).map((id) => ({
+        queryKey: ["news-item", id],
+        queryFn: () => getNewsByIdQueryFn(id),
+      })) ?? [],
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
+      };
+    },
+  });
+
   console.log({ isLoading, isFetching, data, isError, error, status });
+  console.log(JSON.stringify(newsItems, null, 2));
 
   return (
     <View

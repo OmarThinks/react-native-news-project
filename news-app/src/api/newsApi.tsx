@@ -7,4 +7,41 @@ const getAllTopNewsQueryFn = async () => {
   return data;
 };
 
-export { getAllTopNewsQueryFn };
+// /item/{id}.json
+// Example: https://hacker-news.firebaseio.com/v0/item/47796264.json
+
+const getNewsByIdQueryFn = async (id: number) => {
+  const response = await fetch(
+    `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+  );
+  const data = (await response.json()) as NewsItemType;
+  return data;
+};
+
+/*
+{
+  "by": "mfiguiere",
+  "descendants": 1,
+  "id": 47796264,
+  "kids": [47797004],
+  "score": 6,
+  "time": 1776358694,
+  "title": "Best practices for using Claude Opus 4.7 with Claude Code",
+  "type": "story",
+  "url": "https://claude.com/blog/best-practices-for-using-claude-opus-4-7-with-claude-code"
+}
+*/
+
+type NewsItemType = {
+  by: string;
+  descendants: number;
+  id: number;
+  kids: number[];
+  score: number;
+  time: number;
+  title: string;
+  type: string;
+  url: string;
+};
+
+export { getAllTopNewsQueryFn, getNewsByIdQueryFn };
