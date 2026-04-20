@@ -1,10 +1,17 @@
 import { useIsAppInitialized } from "@/hooks/useIsAppInitialized";
-import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
+import { useColors, useThemeMode } from "@/redux/slices/themeSlice/colorsHooks";
 import { store } from "@/redux/store";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { ActivityIndicator, View } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
 import "../../global.css";
+import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 function RootLayout() {
   return (
@@ -16,6 +23,7 @@ function RootLayout() {
 
 function AppInsideRedux() {
   const colors = useColors();
+  const themeMode = useThemeMode();
 
   const isAppInitialized = useIsAppInitialized();
 
@@ -28,21 +36,29 @@ function AppInsideRedux() {
   }
 
   return (
-    <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.text}
-      labelStyle={{ selected: { color: colors.text } }}
+    <SafeAreaView
+      style={{ backgroundColor: colors.background }}
+      className=" self-stretch flex-1"
+      edges={["top", "right", "left"]}
     >
-      <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
-      </NativeTabs.Trigger>
+      <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
 
-      <NativeTabs.Trigger name="settings">
-        <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon sf="gear" md="settings" />
-      </NativeTabs.Trigger>
-    </NativeTabs>
+      <NativeTabs
+        backgroundColor={colors.background}
+        indicatorColor={colors.text}
+        labelStyle={{ selected: { color: colors.text } }}
+      >
+        <NativeTabs.Trigger name="index">
+          <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
+        </NativeTabs.Trigger>
+
+        <NativeTabs.Trigger name="settings">
+          <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Icon sf="gear" md="settings" />
+        </NativeTabs.Trigger>
+      </NativeTabs>
+    </SafeAreaView>
   );
 }
 

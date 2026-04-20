@@ -12,6 +12,7 @@
 - Add theme ✅
 - add the ability to switch theme colors ✅
 - Initialize the app ✅
+- AppBar
 - SafeAreaView
 - Install and prepare React Query
 - Add the API points to React Query
