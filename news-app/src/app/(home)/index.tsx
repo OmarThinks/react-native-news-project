@@ -3,9 +3,10 @@ import { Header } from "@/components/Views/Header";
 import NewsCard from "@/components/cards/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
+import { isPending } from "@reduxjs/toolkit";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View, Text } from "react-native";
 
 function Index() {
   const colors = useColors();
@@ -39,7 +40,7 @@ function Index() {
     if (!data) return;
 
     const now = Date.now();
-    if (now - lastNextPageTriggerTime < 1000) {
+    if (now - lastNextPageTriggerTime < 500) {
       // Prevent triggering next page multiple times within 1 second
       return;
     }
@@ -67,9 +68,18 @@ function Index() {
         onEndReached={nextPage}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
-          isFetching ? (
+          pending ? (
             <View className="p-4">
               <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : loadedItems.length === data?.length ? (
+            <View className="p-4 self-stretch">
+              <Text
+                style={{ color: colors.textSecondary }}
+                className="text-center text-20px] font-medium"
+              >
+                No more news to load
+              </Text>
             </View>
           ) : null
         }
