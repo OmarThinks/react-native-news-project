@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "news-app",
-    "slug": "news-app",
+    "name": "Tech News",
+    "slug": "Tech News",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/new-icon.png",
