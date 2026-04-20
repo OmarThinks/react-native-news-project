@@ -8,16 +8,21 @@
     "scheme": "newsapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.technews.app"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/new-icon.png",
         "backgroundImage": "./assets/images/new-icon.png",
-        "monochromeImage": "./assets/images/new-icon.png"
+        "monochromeImage": "./assets/images/new-icon.png",
+        "package": "com.technews.app"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.technews.app"
     },
     "web": {
       "output": "static",
@@ -32,6 +37,17 @@
           "android": {
             "image": "./assets/images/new-icon.png",
             "imageWidth": 76
+          }
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/crashlytics",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
           }
         }
       ]

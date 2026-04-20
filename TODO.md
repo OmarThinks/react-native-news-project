@@ -2,7 +2,7 @@
 
 ✅
 
-- testing
+- testing ✅
+- Auth (convex)
 - docs
 - video
-- Auth (convex)
