@@ -5,6 +5,19 @@ import { useRouter } from "expo-router";
 import { Header } from "./Header";
 import darkColors from "@/redux/slices/themeSlice/colors/darkColors";
 
+// --- FIX STARTS HERE ---
+// Mocking @expo/vector-icons prevents the async font-loading state updates
+jest.mock("@expo/vector-icons", () => {
+  const { View } = require("react-native");
+  return {
+    Ionicons: (props: any) => <View {...props} />,
+    MaterialIcons: (props: any) => <View {...props} />,
+    MaterialCommunityIcons: (props: any) => <View {...props} />,
+    // Add any other specific icon sets you use in Header here
+  };
+});
+// --- FIX ENDS HERE ---
+
 jest.mock("@/redux/slices/themeSlice/colorsHooks");
 jest.mock("expo-router");
 
@@ -28,7 +41,7 @@ describe("Header", () => {
     jest.restoreAllMocks();
   });
 
-  it("renders with title only (default settings and back button hidden)", () => {
+  it("renders with title only (default settings and back button hidden)", async () => {
     const { toJSON } = render(
       <Header
         title="Home"
@@ -36,10 +49,14 @@ describe("Header", () => {
         shouldHideBackButton={true}
       />,
     );
-    expect(toJSON()).toMatchSnapshot();
+
+    // Using waitFor is a safety net for any other minor async updates
+    await waitFor(() => {
+      expect(toJSON()).toMatchSnapshot();
+    });
   });
 
-  it("renders with back button visible", () => {
+  it("renders with back button visible", async () => {
     mockCanGoBack.mockReturnValue(true);
     const { toJSON } = render(
       <Header
@@ -48,10 +65,12 @@ describe("Header", () => {
         shouldHideBackButton={false}
       />,
     );
-    expect(toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(toJSON()).toMatchSnapshot();
+    });
   });
 
-  it("renders with settings button visible", () => {
+  it("renders with settings button visible", async () => {
     const { toJSON } = render(
       <Header
         title="Home"
@@ -59,10 +78,12 @@ describe("Header", () => {
         shouldHideBackButton={true}
       />,
     );
-    expect(toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(toJSON()).toMatchSnapshot();
+    });
   });
 
-  it("renders with both back and settings buttons visible", () => {
+  it("renders with both back and settings buttons visible", async () => {
     mockCanGoBack.mockReturnValue(true);
     const { toJSON } = render(
       <Header
@@ -71,6 +92,8 @@ describe("Header", () => {
         shouldHideBackButton={false}
       />,
     );
-    expect(toJSON()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(toJSON()).toMatchSnapshot();
+    });
   });
 });
