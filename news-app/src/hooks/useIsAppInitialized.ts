@@ -17,8 +17,9 @@ const useIsAppInitialized = () => {
   const dispatch = useAppDispatch();
 
   function handleAuthStateChanged(user: FirebaseAuthTypes.User | null) {
-    dispatch(setUser(user));
-    if (isAuthInitialized) setIsAuthInitialized(false);
+    console.log("Auth state changed. User:", user);
+    dispatch(setUser(user ? JSON.parse(JSON.stringify(user)) : null));
+    setIsAuthInitialized(true);
   }
 
   useEffect(() => {

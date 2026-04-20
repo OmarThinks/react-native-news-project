@@ -9,6 +9,8 @@ import { ActivityIndicator, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Provider as ReduxProvider } from "react-redux";
 import "../../global.css";
+import { useUser } from "@/redux/slices/auth/authHooks";
+import LoginScreen from "@/screens/LoginScreen";
 
 const queryClient = new QueryClient();
 
@@ -28,11 +30,28 @@ function AppInsideRedux() {
 
   const isAppInitialized = useIsAppInitialized();
 
+  const user = useUser();
+  console.log("Current user:", user);
+
   if (!isAppInitialized) {
     return (
       <View className=" self-stretch flex-1 justify-center items-center">
         <ActivityIndicator size="large" color={colors.primary} />
       </View>
+    );
+  }
+
+  if (!user) {
+    return (
+      <SafeAreaView
+        style={{ backgroundColor: colors.background }}
+        className=" self-stretch flex-1 justify-center items-center px-6"
+        edges={["top", "right", "left"]}
+      >
+        <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
+
+        <LoginScreen />
+      </SafeAreaView>
     );
   }
 
