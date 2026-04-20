@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -17,6 +18,7 @@
     "@react-navigation/native": "^7.1.33",
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.99.2",
+    "@testing-library/react-native": "13.3.3",
     "babel-preset-expo": "^55.0.17",
     "expo": "~55.0.15",
     "expo-constants": "~55.0.14",
@@ -54,5 +56,22 @@
     "jest-expo": "~55.0.16",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/expo-env.d.ts",
+      "!**/.expo/**"
+    ]
+  },
+  "overrides": {
+    "@testing-library/react-native": {
+      "react": "$react"
+    }
+  }
 }
