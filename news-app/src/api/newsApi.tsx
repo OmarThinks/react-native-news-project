@@ -1,3 +1,5 @@
+import type { NewsItemType } from "@/types/NewsItemType";
+
 // https://hacker-news.firebaseio.com/v0/topstories.json
 const getAllTopNewsQueryFn = async () => {
   const response = await fetch(
@@ -31,17 +33,5 @@ const getNewsByIdQueryFn = async (id: number) => {
   "url": "https://claude.com/blog/best-practices-for-using-claude-opus-4-7-with-claude-code"
 }
 */
-
-type NewsItemType = {
-  by: string;
-  descendants: number;
-  id: number;
-  kids: number[];
-  score: number;
-  time: number;
-  title: string;
-  type: string;
-  url: string;
-};
 
 export { getAllTopNewsQueryFn, getNewsByIdQueryFn };

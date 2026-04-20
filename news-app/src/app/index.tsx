@@ -1,7 +1,10 @@
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
 import { useQuery, useQueries } from "@tanstack/react-query";
+import { Header } from "@/components/Views/Header";
+import NewsCard from "@/components/cards/NewsCard";
+import { NewsItemType } from "@/types/NewsItemType";
 
 function Index() {
   const colors = useColors();
@@ -11,7 +14,7 @@ function Index() {
     queryFn: getAllTopNewsQueryFn,
   });
 
-  const { data: newsItems } = useQueries({
+  const { data: newsItems = [] } = useQueries({
     queries:
       data?.slice(0, 10).map((id) => ({
         queryKey: ["news-item", id],
@@ -25,17 +28,20 @@ function Index() {
     },
   });
 
-  console.log({ isLoading, isFetching, data, isError, error, status });
+  //console.log({ isLoading, isFetching, data, isError, error, status });
   console.log(JSON.stringify(newsItems, null, 2));
 
   return (
     <View
-      className="flex-1 items-center justify-center"
+      className="flex-1 self-stretch"
       style={{ backgroundColor: colors.background }}
     >
-      <Text className="text-xl font-bold" style={{ color: colors.text }}>
-        Welcome to our News App!
-      </Text>
+      <Header title="Top News" />
+      <FlatList
+        data={newsItems}
+        renderItem={({ item }) => <NewsCard newsItem={item} key={item?.id} />}
+        //keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 }
