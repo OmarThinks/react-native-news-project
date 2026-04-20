@@ -1,6 +1,8 @@
+import { useIsAppInitialized } from "@/hooks/useIsAppInitialized";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { store } from "@/redux/store";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { ActivityIndicator, View } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
 import "../../global.css";
 
@@ -14,6 +16,16 @@ function RootLayout() {
 
 function AppInsideRedux() {
   const colors = useColors();
+
+  const isAppInitialized = useIsAppInitialized();
+
+  if (!isAppInitialized) {
+    return (
+      <View className=" self-stretch flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <NativeTabs
