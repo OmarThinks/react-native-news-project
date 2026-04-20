@@ -1,6 +1,6 @@
 import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
 import { Header } from "@/components/Views/Header";
-import NewsCard from "@/components/cards/NewsCard";
+import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { isPending } from "@reduxjs/toolkit";

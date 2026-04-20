@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsCard renders news item correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    className="text-lg font-bold mb-2 leading-6"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    Test News Title
+  </Text>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        150
+         points
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`NewsCard renders with high score correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    className="text-lg font-bold mb-2 leading-6"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    Popular News Item
+  </Text>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        5000
+         points
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`NewsCard renders with long title correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#18181B",
+      "borderColor": "#27272A",
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    className="text-lg font-bold mb-2 leading-6"
+    style={
+      {
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    This is a very long news title that spans multiple lines and tests how the component handles lengthy titles in the UI
+  </Text>
+  <View
+    className="flex-row justify-between items-center"
+  >
+    <Text
+      className="text-sm"
+      style={
+        {
+          "color": "#F0F0F0",
+        }
+      }
+    >
+      by 
+      testuser
+    </Text>
+    <View
+      className="flex-row items-center"
+    >
+      <Text
+        className="text-sm mr-2"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        150
+         points
+      </Text>
+      <Text
+        className="text-sm"
+        style={
+          {
+            "color": "#F0F0F0",
+          }
+        }
+      >
+        just now
+      </Text>
+    </View>
+  </View>
+</View>
+`;

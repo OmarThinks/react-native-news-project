@@ -11,7 +11,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { getNewsByIdQueryFn } from "@/api/newsApi";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
-import NewsCard from "@/components/cards/NewsCard";
+import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
