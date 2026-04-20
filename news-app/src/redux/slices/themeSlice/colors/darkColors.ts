@@ -1,6 +1,6 @@
-import type { ThemeColorType } from "./ThemeColorType";
+import { ThemeColorsType } from "./ThemeColorsType";
 
-const darkThemeColors: ThemeColorType = {
+const darkColors: ThemeColorsType = {
   primary: "#A3E635",
   secondary: "#818CF8",
   background: "#09090B",
@@ -11,4 +11,4 @@ const darkThemeColors: ThemeColorType = {
   error: "#F87171",
 };
 
-export { darkThemeColors };
+export default darkColors;

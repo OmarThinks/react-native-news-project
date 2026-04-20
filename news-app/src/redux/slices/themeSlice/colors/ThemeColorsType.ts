@@ -1,4 +1,4 @@
-type ThemeColorType = {
+type ThemeColorsType = {
   primary: string;
   secondary: string;
   background: string;
@@ -9,4 +9,4 @@ type ThemeColorType = {
   error: string;
 };
 
-export type { ThemeColorType };
+export type { ThemeColorsType };

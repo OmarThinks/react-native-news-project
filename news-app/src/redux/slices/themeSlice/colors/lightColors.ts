@@ -1,6 +1,6 @@
-import type { ThemeColorType } from "./ThemeColorType";
+import type { ThemeColorsType } from "./ThemeColorsType";
 
-const lightThemeColors: ThemeColorType = {
+const lightColors: ThemeColorsType = {
   primary: "#84CC16",
   secondary: "#4F46E5",
   background: "#FFFFFF",
@@ -11,4 +11,4 @@ const lightThemeColors: ThemeColorType = {
   error: "#EF4444",
 };
 
-export { lightThemeColors };
+export default lightColors;

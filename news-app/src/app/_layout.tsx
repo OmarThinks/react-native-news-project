@@ -1,9 +1,18 @@
 import { useColors } from "@/colors/useColors";
-import "../../global.css";
-import { Stack } from "expo-router";
+import { store } from "@/redux/store";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { Provider as ReduxProvider } from "react-redux";
+import "../../global.css";
 
-export default function RootLayout() {
+function RootLayout() {
+  return (
+    <ReduxProvider store={store}>
+      <AppInsideRedux />
+    </ReduxProvider>
+  );
+}
+
+function AppInsideRedux() {
   const colors = useColors();
 
   return (
@@ -24,3 +33,5 @@ export default function RootLayout() {
     </NativeTabs>
   );
 }
+
+export default RootLayout;
