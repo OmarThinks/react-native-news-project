@@ -4,7 +4,7 @@ import NewsCard from "@/components/cards/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { memo, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
 
 function Index() {

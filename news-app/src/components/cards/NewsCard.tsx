@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect } from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
+import { router } from "expo-router";
 
 const NewsCard = ({ newsItem }: { newsItem: NewsItemType | undefined }) => {
   const colors = useColors();
@@ -35,7 +36,8 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType | undefined }) => {
       style={{ backgroundColor: colors.surface, borderColor: colors.border }}
       onPress={() => {
         // Handle press, e.g., open URL
-        console.log("Open URL:", newsItem.url);
+        //console.log("Open URL:", newsItem.url);
+        router.push(`/news/${newsItem.id}`);
       }}
     >
       <Text
