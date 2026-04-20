@@ -1,4 +1,4 @@
-import { Header } from "@/components/Views/Header";
+import { Header } from "@/components/Views/Header/Header";
 import { useColors, useThemeMode } from "@/redux/slices/themeSlice/colorsHooks";
 import { setThemeMode } from "@/redux/slices/themeSlice/themeSlice";
 import { AppDispatch } from "@/redux/store";

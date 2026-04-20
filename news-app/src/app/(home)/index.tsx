@@ -1,5 +1,5 @@
 import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
-import { Header } from "@/components/Views/Header";
+import { Header } from "@/components/Views/Header/Header";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";

@@ -15,7 +15,7 @@ import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
-import { Header } from "@/components/Views/Header";
+import { Header } from "@/components/Views/Header/Header";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
