@@ -1,5 +1,5 @@
 {
-  "name": "news-app",
+  "name": "tech-news",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -48,7 +48,10 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.99.2",
+    "@types/jest": "29.5.14",
     "@types/react": "~19.2.2",
+    "jest": "~29.7.0",
+    "jest-expo": "~55.0.16",
     "typescript": "~5.9.2"
   },
   "private": true
