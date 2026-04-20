@@ -14,6 +14,7 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import NewsCard from "@/components/cards/NewsCard";
 import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
+import CommentCard from "@/components/cards/CommentCard";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -200,7 +201,7 @@ const NewsDetailsScreen = () => {
             {kidNews.map(
               (item, index) =>
                 item && (
-                  <NewsCard key={`${item.id}-${index}`} newsItem={item} />
+                  <CommentCard key={`${item.id}-${index}`} commentItem={item} />
                 ),
             )}
           </View>
