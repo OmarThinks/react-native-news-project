@@ -35,6 +35,7 @@ const SortButtonsAndSearchBar = ({
           borderColor: colors.border,
           borderWidth: 2,
         }}
+        placeholderTextColor={colors.text + "77"}
       />
       <View className=" self-stretch flex-row flex-wrap gap-2">
         <ToggleSortButton
