@@ -9,7 +9,7 @@ import { NewsItemType } from "@/types/NewsItemType";
 import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { getFilteredAndSortedNews } from "@/utils/getFilteredAndSortedNews";
 import { useQueries } from "@tanstack/react-query";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useDeferredValue, useMemo, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
@@ -76,10 +76,12 @@ const Bookmarks = () => {
     SortingEnum.NONE,
   );
 
+  const deferredSearchText = useDeferredValue(searchText);
+
   const loadedItems = useMemo(() => {
     return getFilteredAndSortedNews({
       newsItems,
-      searchText,
+      searchText: deferredSearchText,
       scoreSorting,
       timeSorting,
     });

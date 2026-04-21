@@ -9,7 +9,7 @@ import { NewsItemType } from "@/types/NewsItemType";
 import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { getFilteredAndSortedNews } from "@/utils/getFilteredAndSortedNews";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useDeferredValue, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 function Index() {
@@ -66,10 +66,12 @@ function Index() {
     SortingEnum.NONE,
   );
 
+  const deferredSearchText = useDeferredValue(searchText);
+
   const loadedItems = useMemo(() => {
     return getFilteredAndSortedNews({
       newsItems,
-      searchText,
+      searchText: deferredSearchText,
       scoreSorting,
       timeSorting,
     });
