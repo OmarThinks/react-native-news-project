@@ -22,6 +22,7 @@
       "package": "com.technews.app"
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/new-icon.png"
     },

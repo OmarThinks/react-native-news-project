@@ -10,8 +10,6 @@
 
 ## Bonus (optional — only attempt once the core is solid)
 
-- A search bar on Screen 1 with debounced filtering and no additional API calls.
-
 ## Finish:
 
 - iOS
