@@ -3,7 +3,7 @@
 ✅
 
 - testing ✅
-- Auth (firebase auth)
+- Auth (firebase auth) ✅
 - obufiscation
 - iOS
 - docs

@@ -7,6 +7,7 @@
     "icon": "./assets/images/new-icon.png",
     "scheme": "newsapp",
     "userInterfaceStyle": "automatic",
+    "jsEngine": "hermes",
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
       "icon": "./assets/expo.icon",
@@ -47,7 +48,9 @@
         "expo-build-properties",
         {
           "ios": {
-            "useFrameworks": "static"
+            "useFrameworks": "static",
+            "enableProguardInReleaseBuilds": true,
+            "enableMinifyInReleaseBuilds": true
           }
         }
       ]

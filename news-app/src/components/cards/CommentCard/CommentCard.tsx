@@ -24,7 +24,7 @@ const CommentCard = ({ commentItem }: { commentItem: CommentItemType }) => {
     return `${diffInDays}d ago`;
   };
 
-  const cleanText = commentItem.text
+  const cleanText = (commentItem.text ?? "")
     .replace(/<p>/g, "\n\n")
     .replace(/<\/p>/g, "")
     .replace(/&#x27;/g, "'")
