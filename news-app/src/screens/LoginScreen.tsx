@@ -8,6 +8,10 @@ const LoginScreen = () => {
   const colors = useColors();
 
   const handleSignIn = async () => {
+    if (isLoading) {
+      return;
+    }
+
     setIsLoading(true);
     signInAnonymously(getAuth())
       .then(() => {

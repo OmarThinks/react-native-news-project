@@ -5,6 +5,7 @@ import { AppDispatch } from "@/redux/store";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
+import { getAuth, signOut } from "@react-native-firebase/auth";
 
 const Settings = () => {
   const colors = useColors();
