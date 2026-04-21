@@ -8,17 +8,10 @@
 
 - FlatList displays:
   - (Take the time to revise the fields)
-- error state and empty state
-  - error screen ✅
-  - use error screen in
-    - Home screen ✅
-    - details screen
 - sort toggle, by score or by time (Must survive navigation back)
-- FlatList: show indicator
 
 ## Screen 2: Article Detail:
 
-- Display: title, author, score, time, and the full URL as a tappable link via Linking.openURL.
 - Include a Share button in the header using the React Native Share API.
 - Include a Bookmark toggle in the header. Bookmarked state must persist across cold restarts (AsyncStorage or MMKV — state your choice and rationale in the README).
 - Navigating back must restore the list to its previous scroll position.
