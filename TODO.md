@@ -9,9 +9,9 @@
 - FlatList displays:
   - (Take the time to revise the fields)
 - error state and empty state
-  - error screen
+  - error screen ✅
   - use error screen in
-    - Home screen
+    - Home screen ✅
     - details screen
 - sort toggle, by score or by time (Must survive navigation back)
 - FlatList: show indicator

@@ -1,4 +1,5 @@
 import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
+import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
@@ -10,11 +11,19 @@ import { ActivityIndicator, FlatList, Text, View } from "react-native";
 function Index() {
   const colors = useColors();
 
-  const { isLoading, isFetching, data, isError, error, status, refetch } =
-    useQuery({
-      queryKey: ["top-news"],
-      queryFn: getAllTopNewsQueryFn,
-    });
+  const {
+    isLoading,
+    isFetching,
+    data,
+    isError,
+    error,
+    status,
+    refetch,
+    isRefetching,
+  } = useQuery({
+    queryKey: ["top-news"],
+    queryFn: getAllTopNewsQueryFn,
+  });
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -75,6 +84,25 @@ function Index() {
     newsItems?.length,
     currentPage,
   );*/
+
+  if (status === "pending") {
+    return (
+      <View
+        className="flex-1 justify-center items-center"
+        style={{ backgroundColor: colors.background }}
+      >
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  } else if (status === "error") {
+    return (
+      <ErrorScreen
+        error={error?.message ?? "An error occurred while fetching news."}
+        refetch={refetch}
+        isRefetching={isRefetching}
+      />
+    );
+  }
 
   return (
     <View
