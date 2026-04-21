@@ -11,9 +11,11 @@ import { useLocalSearchParams } from "expo-router";
 import React, { useMemo } from "react";
 import {
   ActivityIndicator,
+  Button,
   Linking,
   RefreshControl,
   ScrollView,
+  Share,
   Text,
   TouchableOpacity,
   View,
@@ -117,6 +119,26 @@ const NewsDetailsScreen = () => {
         }
       >
         {/* Main Article Title */}
+
+        <View className=" self-stretch flex-row my-3 justify-between items-center">
+          <Button
+            title="Share"
+            onPress={async () => {
+              if (data.url) {
+                try {
+                  await Share.share({
+                    url: data.url,
+                    title: data.title,
+                  });
+                } catch (error) {
+                  console.error("Failed to share:", error);
+                }
+              }
+            }}
+            color={colors.primary}
+          />
+        </View>
+
         <Text
           style={{
             fontSize: 24,
