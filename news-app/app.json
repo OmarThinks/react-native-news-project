@@ -1,13 +1,12 @@
 {
   "expo": {
     "name": "Tech News",
-    "slug": "Tech News",
+    "slug": "tech-news",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/new-icon.png",
     "scheme": "newsapp",
     "userInterfaceStyle": "automatic",
-    "jsEngine": "hermes",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.technews.app"
@@ -17,8 +16,7 @@
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/new-icon.png",
         "backgroundImage": "./assets/images/new-icon.png",
-        "monochromeImage": "./assets/images/new-icon.png",
-        "package": "com.technews.app"
+        "monochromeImage": "./assets/images/new-icon.png"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.technews.app"

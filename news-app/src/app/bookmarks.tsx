@@ -9,8 +9,13 @@ import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { getFilteredAndSortedNews } from "@/utils/getFilteredAndSortedNews";
 import { useQueries } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
-import { FlatList, View, Animated, Text } from "react-native";
-import { GestureDetector, Gesture } from "react-native-gesture-handler";
+import { FlatList, View, Text, StyleSheet } from "react-native";
+import {
+  GestureHandlerRootView,
+  Swipeable,
+} from "react-native-gesture-handler";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import { SharedValue } from "react-native-reanimated";
 
 const Bookmarks = () => {
   const colors = useColors();
@@ -30,70 +35,37 @@ const Bookmarks = () => {
     },
   });
 
-  // Dummy function to handle item removal
-  const handleRemoveBookmark = useCallback((itemId: number | string) => {
-    console.log("Remove bookmark with ID:", itemId);
-    // Your removal logic will go here
-  }, []);
+  // 2. Your dummy function
+  const handleSwipeAction = (id: number | string) => {
+    console.log(`Item with ID ${id} was swiped!`);
+    // Add your logic here (e.g., remove from bookmarks)
+  };
+
+  // 3. Define the background UI for when swiping
+  const renderRightActions = (
+    progression: SharedValue<number>,
+    dragX: SharedValue<number>,
+  ) => {
+    return (
+      <View style={[styles.swipeContainer, { backgroundColor: "red" }]}>
+        <Text style={styles.swipeText}>Action</Text>
+      </View>
+    );
+  };
 
   const renderNewsCard = useCallback(
-    ({ item }: { item: NewsItemType }) => {
-      const translateX = new Animated.Value(0);
-
-      const pan = Gesture.Pan()
-        .onUpdate((event) => {
-          if (event.translationX < 0) {
-            translateX.setValue(Math.max(event.translationX, -120));
-          }
-        })
-        .onEnd((event) => {
-          if (event.translationX < -60) {
-            // Trigger removal
-            Animated.timing(translateX, {
-              toValue: -120,
-              duration: 200,
-              useNativeDriver: true,
-            }).start();
-            setTimeout(() => handleRemoveBookmark(item.id), 100);
-          } else {
-            // Snap back
-            Animated.spring(translateX, {
-              toValue: 0,
-              useNativeDriver: true,
-            }).start();
-          }
-        });
-
-      return (
-        <View style={{ overflow: "hidden" }}>
-          <View
-            style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: 120,
-              backgroundColor: "#ef4444",
-              justifyContent: "center",
-              alignItems: "flex-end",
-              paddingRight: 16,
-            }}
-          >
-            <Text style={{ fontSize: 12, color: "white" }}>Delete</Text>
-          </View>
-          <GestureDetector gesture={pan}>
-            <Animated.View
-              style={{
-                transform: [{ translateX }],
-              }}
-            >
-              <NewsCard newsItem={item} notPressable />
-            </Animated.View>
-          </GestureDetector>
-        </View>
-      );
-    },
-    [handleRemoveBookmark],
+    ({ item }: { item: NewsItemType }) => (
+      <ReanimatedSwipeable
+        friction={2}
+        enableTrackpadTwoFingerGesture
+        rightThreshold={40}
+        renderRightActions={renderRightActions}
+        onSwipeableOpen={() => handleSwipeAction(item.id)}
+      >
+        <NewsCard newsItem={item} notPressable />
+      </ReanimatedSwipeable>
+    ),
+    [],
   );
 
   const [searchText, setSearchText] = useState("");
@@ -114,28 +86,43 @@ const Bookmarks = () => {
   }, [newsItems, searchText, scoreSorting, timeSorting]);
 
   return (
-    <View
-      className="flex-1 self-stretch"
-      style={{ backgroundColor: colors.background }}
-    >
-      <Header title="Top News" />
-      <View className=" self-stretch flex-1 px-2">
-        <SortButtonsAndSearchBar
-          textInputValue={searchText}
-          setTextInputValue={setSearchText}
-          scoreSortingState={scoreSorting}
-          setScoreSortingState={setScoreSorting}
-          timeSortingState={timeSorting}
-          setTimeSortingState={setTimeSorting}
-        />
-        <FlatList
-          data={loadedItems as NewsItemType[]}
-          renderItem={renderNewsCard}
-          keyExtractor={(item) => item?.id?.toString?.()}
-        />
+    <GestureHandlerRootView>
+      <View
+        className="flex-1 self-stretch"
+        style={{ backgroundColor: colors.background }}
+      >
+        <Header title="Top News" />
+        <View className=" self-stretch flex-1 px-2">
+          <SortButtonsAndSearchBar
+            textInputValue={searchText}
+            setTextInputValue={setSearchText}
+            scoreSortingState={scoreSorting}
+            setScoreSortingState={setScoreSorting}
+            timeSortingState={timeSorting}
+            setTimeSortingState={setTimeSorting}
+          />
+          <FlatList
+            data={loadedItems as NewsItemType[]}
+            renderItem={renderNewsCard}
+            keyExtractor={(item) => item?.id?.toString?.()}
+          />
+        </View>
       </View>
-    </View>
+    </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  swipeContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: "100%",
+  },
+  swipeText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
 
 export default Bookmarks;
