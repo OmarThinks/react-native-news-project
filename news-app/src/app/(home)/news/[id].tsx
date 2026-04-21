@@ -145,6 +145,8 @@ const NewsDetailsScreen = () => {
             aspectRatio: 1,
             borderRadius: 8,
             marginBottom: 16,
+            maxWidth: 300,
+            alignSelf: "center",
           }}
           contentFit="cover"
         />

@@ -4,7 +4,7 @@
 
 ## Summary:
 
-- Bookmarks
+- Bookmarks ✅
 - Offline
 - Firebase auth again
 
