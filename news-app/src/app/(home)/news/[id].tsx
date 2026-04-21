@@ -20,6 +20,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -120,25 +121,6 @@ const NewsDetailsScreen = () => {
       >
         {/* Main Article Title */}
 
-        <View className=" self-stretch flex-row my-3 justify-between items-center">
-          <Button
-            title="Share"
-            onPress={async () => {
-              if (data.url) {
-                try {
-                  await Share.share({
-                    url: data.url,
-                    title: data.title,
-                  });
-                } catch (error) {
-                  console.error("Failed to share:", error);
-                }
-              }
-            }}
-            color={colors.primary}
-          />
-        </View>
-
         <Text
           style={{
             fontSize: 24,
@@ -151,6 +133,8 @@ const NewsDetailsScreen = () => {
           {data.title}
         </Text>
 
+        
+
         <Image
           source={{ uri: data.imageUrl }}
           style={{
@@ -161,6 +145,58 @@ const NewsDetailsScreen = () => {
           }}
           contentFit="cover"
         />
+
+        <View className=" self-stretch flex-row my-3 justify-end items-center gap-2">
+          <TouchableOpacity
+            onPress={async () => {
+              if (data.url) {
+                try {
+                  await Share.share({
+                    url: data.url,
+                    title: data.title,
+                  });
+                } catch (error) {
+                  console.error("Failed to share:", error);
+                }
+              }
+            }}
+            style={{
+              borderColor: colors.primary,
+            }}
+            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
+          >
+            <MaterialCommunityIcons
+              name="share-variant"
+              size={20}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={async () => {
+              if (data.url) {
+                try {
+                  await Share.share({
+                    url: data.url,
+                    title: data.title,
+                  });
+                } catch (error) {
+                  console.error("Failed to share:", error);
+                }
+              }
+            }}
+            style={{
+              borderColor: colors.primary,
+            }}
+            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
+          >
+            <MaterialCommunityIcons
+              name="abacus"
+              size={20}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+        </View>
 
         {/* Article Metadata */}
         <View
