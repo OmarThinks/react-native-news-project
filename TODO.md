@@ -21,6 +21,7 @@
 - A third Bookmarks tab (bottom tab navigator) showing saved stories with swipe-to-remove.
 - A search bar on Screen 1 with debounced filtering and no additional API calls.
 - An offline detection banner when the device has no connectivity.
+- On logout: reset bookmarks
 
 ## Finish:
 
