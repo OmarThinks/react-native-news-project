@@ -154,8 +154,6 @@ function Index() {
           onRefresh={refetch}
           refreshing={isFetching}
           onEndReachedThreshold={0.5}
-          maxToRenderPerBatch={15}
-          updateCellsBatchingPeriod={50}
           ListFooterComponent={
             pending ? (
               <View className="p-4">

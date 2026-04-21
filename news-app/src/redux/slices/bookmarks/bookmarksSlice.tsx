@@ -32,21 +32,14 @@ const bookmarksSlice = createSlice({
       );
     },
 
-    initializeBookMarks: (state) => {
-      try {
-        AsyncStorage.getItem(StorageKeysEnum.BOOKMARKS).then((value) => {
-          if (value) {
-            const bookmarksArray: number[] = JSON.parse(value);
-            state.bookmarks = bookmarksArray;
-          }
-        });
-      } catch (error) {
-        console.error("Error initializing bookmarks:", error);
-      }
+    setBookMarks: (state, action: PayloadAction<{ bookmarks: number[] }>) => {
+      state.bookmarks = action.payload.bookmarks;
     },
+
+
   },
 });
 
-export const { toggleBookmark, removeAllBookmarks, initializeBookMarks } =
+export const { toggleBookmark, removeAllBookmarks, setBookMarks } =
   bookmarksSlice.actions;
 export default bookmarksSlice;
