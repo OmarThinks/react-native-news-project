@@ -2,20 +2,7 @@
 
 ✅
 
-- Filter comments:
-  - by type="comment"
-  - has a string as a comment
-  - length of filtered comments = number of comments
-
 ## TODO:
-
-- Act like a field can be missing
-  - (from the api call)
-  - NewsCard
-  - CommentCard
-  - Home screen
-  - Comment screen
-  - a?= ""
 
 ## Screen 1:
 

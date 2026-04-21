@@ -47,6 +47,14 @@ const getNewsByIdQueryFn = async <T extends NewsItemType | CommentItemType>(
     data.parent ??= 0;
     data.text ??= "";
     data.time ??= Math.floor(Date.now() / 1000);
+
+    const cleanText = (data.text ?? "")
+      .replace(/<p>/g, "\n\n")
+      .replace(/<\/p>/g, "")
+      .replace(/&#x27;/g, "'")
+      .trim();
+
+    data.text = cleanText;
   }
 
   return data;

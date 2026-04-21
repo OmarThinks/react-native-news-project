@@ -1,23 +1,22 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Linking,
-  ActivityIndicator,
-  RefreshControl,
-} from "react-native";
-import React from "react";
-import { useLocalSearchParams } from "expo-router";
-import { useQueries, useQuery } from "@tanstack/react-query";
 import { getNewsByIdQueryFn } from "@/api/newsApi";
-import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
-import NewsCard from "@/components/cards/NewsCard/NewsCard";
-import { NewsItemType } from "@/types/NewsItemType";
-import { CommentItemType } from "@/types/CommentItemType";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
 import { Header } from "@/components/Views/Header/Header";
+import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
+import { CommentItemType } from "@/types/CommentItemType";
+import { NewsItemType } from "@/types/NewsItemType";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
+import { useLocalSearchParams } from "expo-router";
+import React, { useMemo } from "react";
+import {
+  ActivityIndicator,
+  Linking,
+  RefreshControl,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -43,7 +42,27 @@ const NewsDetailsScreen = () => {
     },
   });
 
-  const comments = _comments.filter((item) => item != null);
+  const typeArray = _comments.map((item) => item?.type);
+  /*console.log(
+    "Types of fetched kids items:",
+    typeArray,
+    data?.kids,
+    //JSON.stringify(data, null, 2),
+  );*/
+
+  const comments = useMemo(() => {
+    return _comments.filter((item) => {
+      if (item == null) return false;
+      if (item == undefined) return false;
+      if (typeof item !== "object") return false;
+      if (!("text" in item)) return false;
+      if (!(item?.type === "comment")) return false;
+      if (item.text.length === 0) return false;
+      if (item.text.startsWith("[") && item.text.endsWith("]")) return false;
+
+      return true;
+    });
+  }, [_comments]);
 
   const handleOpenURL = async (url: string) => {
     try {
