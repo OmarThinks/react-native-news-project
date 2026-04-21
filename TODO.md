@@ -6,8 +6,8 @@
 
 - Remove firebase, run on web, this is an advantage for the interviewers to play around with your code ✅
 - Make auth work
-  - Login Screen
-  - Signout screen
+  - Login Screen ✅
+  - Signout screen ✅
   - initialize app
   - Redux ✅
 

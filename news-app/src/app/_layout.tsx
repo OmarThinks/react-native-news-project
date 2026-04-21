@@ -31,7 +31,7 @@ function AppInsideRedux() {
   const isAppInitialized = useIsAppInitialized();
 
   const user = useUser();
-  console.log("Current user:", user);
+  // console.log("Current user:", user);
 
   if (!isAppInitialized) {
     return (

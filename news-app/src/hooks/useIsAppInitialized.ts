@@ -12,8 +12,30 @@ const useIsAppInitialized = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const initializeAuth = () => {
+      //console.log("initializing auth...");
+      AsyncStorage.getItem(StorageKeysEnum.USER)
+        .then((storedUser) => {
+          if (storedUser) {
+            dispatch(setUser(JSON.parse(storedUser)));
+          } else {
+            dispatch(setUser(null));
+          }
+        })
+        .catch((error) => {
+          console.error("Error initializing auth:", error);
+          dispatch(setUser(null));
+        })
+        .finally(() => {
+          setIsAuthInitialized(true);
+        });
+    };
+    initializeAuth();
+  }, []);
+
+  useEffect(() => {
     const initializeTheme = async () => {
-      console.log("initializing theme...");
+      //console.log("initializing theme...");
       const storedThemeMode = await AsyncStorage.getItem(
         StorageKeysEnum.THEME_MODE,
       );
