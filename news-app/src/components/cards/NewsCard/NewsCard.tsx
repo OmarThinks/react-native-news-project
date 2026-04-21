@@ -72,12 +72,27 @@ const NewsCard = ({
           />
         </View>
         <View className=" flex-1 grow shrink">
-          <Text
-            className="text-lg font-bold mb-2 leading-6"
-            style={{ color: colors.text }}
-          >
-            {newsItem.title}
-          </Text>
+          <View className=" self-stretch flex-row justify-between items-start gap-1">
+            <Text
+              className="text-lg font-bold mb-2 leading-6 grow shrink"
+              style={{ color: colors.text }}
+            >
+              {newsItem.title}
+            </Text>
+            <TouchableOpacity
+              onPress={_toggleBookmark}
+              style={{
+                borderColor: colors.primary,
+              }}
+              className=" rounded-full w-[35px] h-[35px] justify-center items-center border-[2px]"
+            >
+              <MaterialCommunityIcons
+                name={isBookMarked ? "bookmark" : "bookmark-outline"}
+                size={18}
+                color={colors.primary}
+              />
+            </TouchableOpacity>
+          </View>
           <View className="flex-row justify-between items-center">
             <Text className="text-sm" style={{ color: colors.textSecondary }}>
               by {newsItem.by}
@@ -101,19 +116,6 @@ const NewsCard = ({
           >
             {newsItem.sourceDomain}
           </Text>
-          <TouchableOpacity
-            onPress={_toggleBookmark}
-            style={{
-              borderColor: colors.primary,
-            }}
-            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
-          >
-            <MaterialCommunityIcons
-              name={isBookMarked ? "bookmark" : "bookmark-outline"}
-              size={20}
-              color={colors.primary}
-            />
-          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>

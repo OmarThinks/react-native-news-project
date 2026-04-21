@@ -46,7 +46,7 @@ const Bookmarks = () => {
   ) => {
     return (
       <View style={[styles.swipeContainer, { backgroundColor: "red" }]}>
-        <Text style={styles.swipeText}>Action</Text>
+        <Text style={styles.swipeText}>Delete</Text>
       </View>
     );
   };
