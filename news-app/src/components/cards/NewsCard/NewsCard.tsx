@@ -67,7 +67,7 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
               >
                 {newsItem.score} points
               </Text>
-              <Text className="text-sm" style={{ color: colors.textSecondary }}>
+              <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
                 {formatTime(newsItem.time)}
               </Text>
             </View>
