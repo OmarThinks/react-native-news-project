@@ -1,3 +1,6 @@
+import CircleIcon from "@/components/CircleIcon/CircleIcon";
+import { useBookmarksContext } from "@/contexts/BookmarksContext";
+import { toggleBookmark } from "@/redux/slices/bookmarks/bookmarksSlice";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { Image } from "expo-image";
@@ -5,9 +8,6 @@ import { router } from "expo-router";
 import React, { useMemo } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { toggleBookmark } from "@/redux/slices/bookmarks/bookmarksSlice";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useBookmarksContext } from "@/contexts/BookmarksContext";
 
 const NewsCard = ({
   newsItem,
@@ -79,19 +79,14 @@ const NewsCard = ({
             >
               {newsItem.title}
             </Text>
-            <TouchableOpacity
+            <CircleIcon
+              iconName={isBookMarked ? "bookmark" : "bookmark-outline"}
+              size={35}
+              color={colors.primary}
+              borderWidth={2}
+              borderRadius={99}
               onPress={_toggleBookmark}
-              style={{
-                borderColor: colors.primary,
-              }}
-              className=" rounded-full w-[35px] h-[35px] justify-center items-center border-[2px]"
-            >
-              <MaterialCommunityIcons
-                name={isBookMarked ? "bookmark" : "bookmark-outline"}
-                size={18}
-                color={colors.primary}
-              />
-            </TouchableOpacity>
+            />
           </View>
           <View className="flex-row justify-between items-center">
             <Text className="text-sm" style={{ color: colors.textSecondary }}>

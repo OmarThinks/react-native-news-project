@@ -1,12 +1,12 @@
 import { getNewsByIdQueryFn } from "@/api/newsApi";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
+import CircleIcon from "@/components/CircleIcon/CircleIcon";
 import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
 import useBookmarks from "@/redux/slices/bookmarks/bookmarksHooks";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { CommentItemType } from "@/types/CommentItemType";
 import { NewsItemType } from "@/types/NewsItemType";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
@@ -152,7 +152,12 @@ const NewsDetailsScreen = () => {
         />
 
         <View className=" self-stretch flex-row my-3 justify-end items-center gap-2">
-          <TouchableOpacity
+          <CircleIcon
+            iconName="share-variant"
+            size={45}
+            color={colors.primary}
+            borderWidth={2}
+            borderRadius={99}
             onPress={async () => {
               if (data.url) {
                 try {
@@ -165,33 +170,17 @@ const NewsDetailsScreen = () => {
                 }
               }
             }}
-            style={{
-              borderColor: colors.primary,
-            }}
-            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
-          >
-            <MaterialCommunityIcons
-              name="share-variant"
-              size={20}
-              color={colors.primary}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
+          />
+          <CircleIcon
+            iconName={isBookmarked ? "bookmark" : "bookmark-outline"}
+            size={45}
+            color={colors.primary}
+            borderWidth={2}
+            borderRadius={99}
             onPress={() => {
               toggleBookmark(Number(id));
             }}
-            style={{
-              borderColor: colors.primary,
-            }}
-            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
-          >
-            <MaterialCommunityIcons
-              name={isBookmarked ? "bookmark" : "bookmark-outline"}
-              size={20}
-              color={colors.primary}
-            />
-          </TouchableOpacity>
+          />
         </View>
 
         {/* Article Metadata */}
