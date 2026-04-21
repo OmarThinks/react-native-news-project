@@ -4,12 +4,16 @@ import { useAppDispatch } from "@/redux/store";
 import { StorageKeysEnum } from "@/storage/StorageKeysEnum";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import { initializeBookMarks } from "@/redux/slices/bookmarks/bookmarksSlice";
 
 const useIsAppInitialized = () => {
   const [isThemeInitialized, setIsThemeInitialized] = useState(false);
   const [isAuthInitialized, setIsAuthInitialized] = useState(true);
 
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(initializeBookMarks());
+  }, [dispatch]);
 
   useEffect(() => {
     const initializeAuth = () => {

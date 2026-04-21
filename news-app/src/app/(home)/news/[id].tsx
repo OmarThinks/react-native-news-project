@@ -5,13 +5,13 @@ import { Header } from "@/components/Views/Header/Header";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { CommentItemType } from "@/types/CommentItemType";
 import { NewsItemType } from "@/types/NewsItemType";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import React, { useMemo } from "react";
 import {
   ActivityIndicator,
-  Button,
   Linking,
   RefreshControl,
   ScrollView,
@@ -20,7 +20,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -132,8 +131,6 @@ const NewsDetailsScreen = () => {
         >
           {data.title}
         </Text>
-
-        
 
         <Image
           source={{ uri: data.imageUrl }}
