@@ -2,9 +2,15 @@
 
 ✅
 
+- Filter comments:
+  - by type="comment"
+  - has a string as a comment
+  - length of filtered comments = number of comments
+
 ## TODO:
 
 - Act like a field can be missing
+  - (from the api call)
   - NewsCard
   - CommentCard
   - Home screen
@@ -13,18 +19,7 @@
 
 ## Screen 1:
 
-"https://picsum.photos/300/300?random=1"
-
-- Hacker News items have no thumbnails. Display a placeholder
-  - in the react query api endpoint, it should be a random picture added ✅
-  - edit the type also ✅
-  - NewsCard: add the image
-  - news Details: add the image
 - FlatList displays:
-  - Title
-  - Source Domain (parsed from the url)
-  - Score
-  - Relative Time
   - (Take the time to revise the fields)
 - error state and empty state
   - error screen
@@ -49,6 +44,7 @@
 
 ## Finish:
 
+- try again with firebase auth, add db url as an empty string
 - test
 - revise the fields
 - iOS
