@@ -9,17 +9,14 @@ import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { getFilteredAndSortedNews } from "@/utils/getFilteredAndSortedNews";
 import { useQueries } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
-import { FlatList, View, Text, StyleSheet } from "react-native";
-import {
-  GestureHandlerRootView,
-  Swipeable,
-} from "react-native-gesture-handler";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { SharedValue } from "react-native-reanimated";
 
 const Bookmarks = () => {
   const colors = useColors();
-  const { bookmarks } = useBookmarks();
+  const { bookmarks, toggleBookmark } = useBookmarks();
 
   const { data: newsItems = [], pending } = useQueries({
     queries:
@@ -36,8 +33,8 @@ const Bookmarks = () => {
   });
 
   // 2. Your dummy function
-  const handleSwipeAction = (id: number | string) => {
-    console.log(`Item with ID ${id} was swiped!`);
+  const handleSwipeAction = (id: number) => {
+    toggleBookmark(id);
     // Add your logic here (e.g., remove from bookmarks)
   };
 
@@ -59,7 +56,9 @@ const Bookmarks = () => {
         friction={2}
         enableTrackpadTwoFingerGesture
         rightThreshold={40}
+        leftThreshold={40}
         renderRightActions={renderRightActions}
+        renderLeftActions={renderRightActions}
         onSwipeableOpen={() => handleSwipeAction(item.id)}
       >
         <NewsCard newsItem={item} notPressable />
@@ -105,6 +104,19 @@ const Bookmarks = () => {
             data={loadedItems as NewsItemType[]}
             renderItem={renderNewsCard}
             keyExtractor={(item) => item?.id?.toString?.()}
+            ListEmptyComponent={() => (
+              <View
+                className=" self-stretch flex-1 justify-center items-center p-5"
+                style={{ backgroundColor: colors.background }}
+              >
+                <Text
+                  className=" font-bold text-[36px]"
+                  style={{ color: colors.text }}
+                >
+                  No bookmarks found
+                </Text>
+              </View>
+            )}
           />
         </View>
       </View>
