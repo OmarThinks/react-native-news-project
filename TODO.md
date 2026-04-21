@@ -9,6 +9,13 @@
 - FlatList displays:
   - (Take the time to revise the fields)
 - sort toggle, by score or by time (Must survive navigation back)
+  - Component: ToggleButton {cases:{id: string, text: string, iconName: string }[], isActive: boolean, activeId: string, setActiveId: (a: string)=>void, defaultId: string }
+  - 2 buttons:
+    - score
+    - date
+  - use the buttons in Home screen, and in bookmarks screen
+  - logic for sorting the data
+  - when one is activated, the other is not activated
 
 ## Screen 2: Article Detail:
 

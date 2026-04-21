@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { Header } from "@/components/Views/Header/Header";
+import { Modal } from "react-native";
 
 const Bookmarks = () => {
   const colors = useColors();

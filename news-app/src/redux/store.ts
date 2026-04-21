@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeSlice from "./slices/themeSlice/themeSlice";
 import authSlice from "./slices/auth/authSlice";
+import bookmarksSlice from "./slices/bookmarks/bookmarksSlice";
+import themeSlice from "./slices/themeSlice/themeSlice";
 
 const store = configureStore({
   reducer: {
     [themeSlice.name]: themeSlice.reducer,
     [authSlice.name]: authSlice.reducer,
+    [bookmarksSlice.name]: bookmarksSlice.reducer,
   },
 });
 
