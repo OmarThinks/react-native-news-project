@@ -10,6 +10,18 @@ import { getAuth, signOut } from "@react-native-firebase/auth";
 const Settings = () => {
   const colors = useColors();
 
+  const [isSigningOut, setIsSigningOut] = React.useState(false);
+
+  const _signOut = () => {
+    if (isSigningOut) {
+      return;
+    }
+    setIsSigningOut(true);
+    signOut(getAuth())
+      .then(() => console.log("User signed out!"))
+      .finally(() => setIsSigningOut(false));
+  };
+
   return (
     <View
       className=" flex-1 self-stretch"
