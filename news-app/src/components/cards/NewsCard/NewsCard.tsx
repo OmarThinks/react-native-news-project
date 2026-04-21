@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { router } from "expo-router";
+import { Image } from "expo-image";
 
 const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
   const colors = useColors();
@@ -40,26 +41,37 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
         router.push(`/news/${newsItem.id}`);
       }}
     >
-      <Text
-        className="text-lg font-bold mb-2 leading-6"
-        style={{ color: colors.text }}
-      >
-        {newsItem.title}
-      </Text>
-      <View className="flex-row justify-between items-center">
-        <Text className="text-sm" style={{ color: colors.textSecondary }}>
-          by {newsItem.by}
-        </Text>
-        <View className="flex-row items-center">
+      <View className=" self-stretch flex-row gap-2">
+        <View style={{ width: 60, height: 60 }}>
+          <Image
+            source={{ uri: newsItem.imageUrl }}
+            style={{ width: "100%", height: "100%", borderRadius: 8 }}
+            contentFit="cover"
+          />
+        </View>
+        <View className=" flex-1 grow shrink">
           <Text
-            className="text-sm mr-2"
-            style={{ color: colors.textSecondary }}
+            className="text-lg font-bold mb-2 leading-6"
+            style={{ color: colors.text }}
           >
-            {newsItem.score} points
+            {newsItem.title}
           </Text>
-          <Text className="text-sm" style={{ color: colors.textSecondary }}>
-            {formatTime(newsItem.time)}
-          </Text>
+          <View className="flex-row justify-between items-center">
+            <Text className="text-sm" style={{ color: colors.textSecondary }}>
+              by {newsItem.by}
+            </Text>
+            <View className="flex-row items-center">
+              <Text
+                className="text-sm mr-2"
+                style={{ color: colors.textSecondary }}
+              >
+                {newsItem.score} points
+              </Text>
+              <Text className="text-sm" style={{ color: colors.textSecondary }}>
+                {formatTime(newsItem.time)}
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </TouchableOpacity>

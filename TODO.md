@@ -4,8 +4,6 @@
 
 ## TODO:
 
-- Toast: on login: success
-- on signout: success
 - Act like a field can be missing
   - NewsCard
   - CommentCard
@@ -17,10 +15,9 @@
 
 "https://picsum.photos/300/300?random=1"
 
-- filter: type ==== story and has url ✅
 - Hacker News items have no thumbnails. Display a placeholder
-  - in the react query api endpoint, it should be a random picture added
-  - edit the type also
+  - in the react query api endpoint, it should be a random picture added ✅
+  - edit the type also ✅
   - NewsCard: add the image
   - news Details: add the image
 - FlatList displays:
@@ -29,9 +26,11 @@
   - Score
   - Relative Time
   - (Take the time to revise the fields)
-- Pull to refresh ✅
-- ActivityIndicator on first load ✅
 - error state and empty state
+  - error screen
+  - use error screen in
+    - Home screen
+    - details screen
 - sort toggle, by score or by time (Must survive navigation back)
 - FlatList: show indicator
 
@@ -50,6 +49,7 @@
 
 ## Finish:
 
+- test
 - revise the fields
 - iOS
 - docs

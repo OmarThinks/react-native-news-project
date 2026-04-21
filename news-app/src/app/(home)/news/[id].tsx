@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Linking,
   ActivityIndicator,
+  RefreshControl,
 } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
@@ -16,10 +17,11 @@ import { NewsItemType } from "@/types/NewsItemType";
 import { CommentItemType } from "@/types/CommentItemType";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
 import { Header } from "@/components/Views/Header/Header";
+import { Image } from "expo-image";
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data } = useQuery({
+  const { data, refetch, isFetching } = useQuery({
     queryKey: ["news-item", id],
     queryFn: () => getNewsByIdQueryFn<NewsItemType>(Number(id)),
   });
@@ -79,6 +81,9 @@ const NewsDetailsScreen = () => {
       <ScrollView
         style={{ flex: 1, backgroundColor: colors.background }}
         contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+        }
       >
         {/* Main Article Title */}
         <Text
@@ -92,6 +97,17 @@ const NewsDetailsScreen = () => {
         >
           {data.title}
         </Text>
+
+        <Image
+          source={{ uri: data.imageUrl }}
+          style={{
+            width: "100%",
+            aspectRatio: 1,
+            borderRadius: 8,
+            marginBottom: 16,
+          }}
+          contentFit="cover"
+        />
 
         {/* Article Metadata */}
         <View
