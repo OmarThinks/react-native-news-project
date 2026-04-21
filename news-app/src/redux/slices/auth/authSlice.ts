@@ -1,8 +1,7 @@
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { createSlice } from "@reduxjs/toolkit";
 
 type AuthState = {
-  user: FirebaseAuthTypes.User | null;
+  user: object | null;
 };
 
 const initialState: AuthState = {

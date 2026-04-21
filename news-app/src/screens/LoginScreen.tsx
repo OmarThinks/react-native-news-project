@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
-import { getAuth, signInAnonymously } from "@react-native-firebase/auth";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -14,20 +13,6 @@ const LoginScreen = () => {
     }
 
     setIsLoading(true);
-    signInAnonymously(getAuth())
-      .then(() => {
-        console.log("User signed in anonymously");
-      })
-      .catch((error) => {
-        if (error.code === "auth/operation-not-allowed") {
-          console.log("Enable anonymous in your firebase console.");
-        }
-
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
   };
 
   return (
