@@ -9,12 +9,10 @@
     "userInterfaceStyle": "automatic",
     "jsEngine": "hermes",
     "ios": {
-      "googleServicesFile": "./GoogleService-Info.plist",
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.technews.app"
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/new-icon.png",
