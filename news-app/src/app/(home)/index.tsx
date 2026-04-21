@@ -5,7 +5,7 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { isPending } from "@reduxjs/toolkit";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, View, Text } from "react-native";
 
 function Index() {
@@ -32,7 +32,18 @@ function Index() {
     },
   });
 
-  const loadedItems = newsItems.filter((item) => item != null);
+  const loadedItems = useMemo(() => {
+    return newsItems.filter((item) => {
+      if (item == null) return false;
+      if (item == undefined) return false;
+      if (typeof item !== "object") return false;
+      if (!("title" in item)) return false;
+      if (!("url" in item)) return false;
+      if (!(item?.type === "story")) return false;
+
+      return true;
+    });
+  }, [newsItems]);
 
   const [lastNextPageTriggerTime, setLastNextPageTriggerTime] = useState(0);
 
@@ -40,8 +51,8 @@ function Index() {
     if (!data) return;
 
     const now = Date.now();
-    if (now - lastNextPageTriggerTime < 500) {
-      // Prevent triggering next page multiple times within 1 second
+    if (now - lastNextPageTriggerTime < 300) {
+      // Prevent triggering next page multiple times within 0.3 second
       return;
     }
     if (newsItems.length < data.length) {
@@ -62,7 +73,7 @@ function Index() {
     >
       <Header title="Top News" />
       <FlatList
-        data={loadedItems}
+        data={loadedItems as NewsItemType[]}
         renderItem={renderNewsCard}
         keyExtractor={(item) => item?.id?.toString?.()}
         onEndReached={nextPage}

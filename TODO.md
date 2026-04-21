@@ -2,16 +2,9 @@
 
 ✅
 
-## TODO:
-
-- Fix colors:
-  - Login screen: light theme ✅
-  - Tabs colors on web ✅
-- SafeAreaView: remove, it should be in every screen ✅
-
 ## Screen 1:
 
-- filter: type ==== story and has url
+- filter: type ==== story and has url ✅
 - FlatList displays:
   - Title
   - Source Domain (parsed from the url)
@@ -38,6 +31,7 @@
 
 ## Finish:
 
+- revise the fields
 - iOS
 - docs
 - video
