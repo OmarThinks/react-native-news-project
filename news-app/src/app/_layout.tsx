@@ -56,16 +56,20 @@ function AppInsideRedux() {
   }
 
   return (
+
     <SafeAreaView
       style={{ backgroundColor: colors.background }}
       className=" self-stretch flex-1"
       edges={["top", "right", "left"]}
     >
+
+            <View className=" self-stretch flex-1" style={{ backgroundColor: colors.background }}>
+
       <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
 
       <NativeTabs
         backgroundColor={colors.background}
-        indicatorColor={colors.text}
+        indicatorColor={colors.primary}
         labelStyle={{ selected: { color: colors.text } }}
       >
         <NativeTabs.Trigger name="(home)">
@@ -78,7 +82,10 @@ function AppInsideRedux() {
           <NativeTabs.Trigger.Icon sf="gear" md="settings" />
         </NativeTabs.Trigger>
       </NativeTabs>
-    </SafeAreaView>
+
+      </View>
+                </SafeAreaView>
+
   );
 }
 

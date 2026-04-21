@@ -4,12 +4,10 @@
 
 ## TODO:
 
-- Remove firebase, run on web, this is an advantage for the interviewers to play around with your code ✅
-- Make auth work
-  - Login Screen ✅
-  - Signout screen ✅
-  - initialize app
-  - Redux ✅
+- Fix colors:
+  - Login screen: light theme ✅
+  - Tabs colors on web ✅
+- SafeAreaView: remove, it should be in every screen ✅
 
 ## Screen 1:
 

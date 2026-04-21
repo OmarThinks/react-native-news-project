@@ -44,6 +44,8 @@ const useIsAppInitialized = () => {
         dispatch(setThemeMode({ mode: "light" }));
       } else if (storedThemeMode === "dark") {
         dispatch(setThemeMode({ mode: "dark" }));
+      } else {
+        dispatch(setThemeMode({ mode: "dark" }));
       }
 
       setIsThemeInitialized(true);

@@ -29,7 +29,7 @@ const LoginScreen = () => {
         <Text className="text-4xl font-bold" style={{ color: colors.primary }}>
           Tech News
         </Text>
-        <Text className="mt-2 text-lg" style={{ color: colors.textSecondary }}>
+        <Text className="mt-2 text-lg" style={{ color: colors.text }}>
           Stay informed, stay ahead
         </Text>
       </View>
@@ -87,7 +87,7 @@ const LoginScreen = () => {
 
       {/* Footer Text */}
       <View className="mt-8 items-center">
-        <Text className="text-sm" style={{ color: colors.textSecondary }}>
+        <Text className="text-sm" style={{ color: colors.text }}>
           Sign in anonymously to continue
         </Text>
       </View>
