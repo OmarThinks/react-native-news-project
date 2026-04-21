@@ -39,6 +39,31 @@ const Settings = () => {
           <ThemeModeComponent themeMode="light" />
           <ThemeModeComponent themeMode="dark" />
         </View>
+
+        <View className=" self-stretch gap-2 mt-6">
+          <Text
+            style={{ color: colors.text, fontSize: 44, fontWeight: "bold" }}
+          >
+            User:
+          </Text>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: !isSigningOut ? colors.error : colors.secondary,
+              borderColor: colors.text,
+            }}
+            className=" self-stretch border rounded-md px-4 py-2 mb-4 justify-center items-center"
+            onPress={_signOut}
+            disabled={isSigningOut}
+          >
+            <Text
+              style={{ color: colors.text }}
+              className="text-[32px] font-semibold"
+            >
+              {isSigningOut ? "Signing Out..." : "Sign Out"}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

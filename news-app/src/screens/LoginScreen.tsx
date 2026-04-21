@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
 import { getAuth, signInAnonymously } from "@react-native-firebase/auth";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const LoginScreen = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -37,7 +38,7 @@ const LoginScreen = () => {
       {/* Header Section */}
       <View className="mb-12 items-center">
         <Text className="text-4xl font-bold" style={{ color: colors.primary }}>
-          NewsHub
+          Tech News
         </Text>
         <Text className="mt-2 text-lg" style={{ color: colors.textSecondary }}>
           Stay informed, stay ahead
@@ -62,7 +63,7 @@ const LoginScreen = () => {
       <TouchableOpacity
         onPress={handleSignIn}
         disabled={isLoading}
-        className="w-full rounded-lg py-4"
+        className=" rounded-lg py-4 self-stretch"
         style={{
           backgroundColor: isLoading ? colors.secondary : colors.primary,
           opacity: isLoading ? 0.7 : 1,
@@ -79,12 +80,19 @@ const LoginScreen = () => {
             </Text>
           </View>
         ) : (
-          <Text
-            className="text-center text-lg font-semibold"
-            style={{ color: colors.background }}
-          >
-            Get Started
-          </Text>
+          <View className=" self-stretch items-center justify-center flex-row gap-2">
+            <Text
+              className="text-center text-lg font-semibold"
+              style={{ color: colors.background }}
+            >
+              Get Started
+            </Text>
+            <MaterialCommunityIcons
+              name="arrow-right-thick"
+              size={24}
+              color={colors.background}
+            />
+          </View>
         )}
       </TouchableOpacity>
 
