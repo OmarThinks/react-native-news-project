@@ -6,8 +6,9 @@ type NewsItemType = {
   score: number;
   time: number;
   title: string;
-  type: string;
+  type: "story";
   url: string;
+  imageUrl: string;
 };
 
 export type { NewsItemType };

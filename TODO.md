@@ -2,19 +2,38 @@
 
 ✅
 
+## TODO:
+
+- Toast: on login: success
+- on signout: success
+- Act like a field can be missing
+  - NewsCard
+  - CommentCard
+  - Home screen
+  - Comment screen
+  - a?= ""
+
 ## Screen 1:
 
+"https://picsum.photos/300/300?random=1"
+
 - filter: type ==== story and has url ✅
+- Hacker News items have no thumbnails. Display a placeholder
+  - in the react query api endpoint, it should be a random picture added
+  - edit the type also
+  - NewsCard: add the image
+  - news Details: add the image
 - FlatList displays:
   - Title
   - Source Domain (parsed from the url)
   - Score
   - Relative Time
+  - (Take the time to revise the fields)
 - Pull to refresh ✅
 - ActivityIndicator on first load ✅
 - error state and empty state
 - sort toggle, by score or by time (Must survive navigation back)
-- Hacker News items have no thumbnails. Display a placeholder
+- FlatList: show indicator
 
 ## Screen 2: Article Detail:
 

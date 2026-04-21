@@ -17,7 +17,7 @@ type CommentItemType = {
   parent: number;
   text: string;
   time: number;
-  type: string;
+  type: "comment";
 };
 
 export type { CommentItemType };

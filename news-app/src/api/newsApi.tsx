@@ -1,3 +1,4 @@
+import { CommentItemType } from "@/types/CommentItemType";
 import type { NewsItemType } from "@/types/NewsItemType";
 
 // https://hacker-news.firebaseio.com/v0/topstories.json
@@ -12,11 +13,20 @@ const getAllTopNewsQueryFn = async () => {
 // /item/{id}.json
 // Example: https://hacker-news.firebaseio.com/v0/item/47796264.json
 
-const getNewsByIdQueryFn = async <T,>(id: number): Promise<T> => {
+const getNewsByIdQueryFn = async <T extends NewsItemType | CommentItemType>(
+  id: number,
+): Promise<T> => {
   const response = await fetch(
     `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
   );
   const data = (await response.json()) as T;
+
+  if (data.type === "story") {
+    // random from 1 to 70
+    const randomNumber = Math.floor(Math.random() * 70) + 1;
+    data.imageUrl = `https://picsum.photos/300/300?random=${randomNumber}`;
+  }
+
   return data;
 };
 

@@ -66,6 +66,7 @@ function Index() {
     [],
   );
 
+  /*
   console.log(
     "isFetching:",
     isFetching,
@@ -73,7 +74,7 @@ function Index() {
     data?.length,
     newsItems?.length,
     currentPage,
-  );
+  );*/
 
   return (
     <View
@@ -86,11 +87,7 @@ function Index() {
         renderItem={renderNewsCard}
         keyExtractor={(item) => item?.id?.toString?.()}
         onEndReached={nextPage}
-        onRefresh={() => {
-          refetch().then(() => {
-            setCurrentPage(1);
-          });
-        }}
+        onRefresh={refetch}
         refreshing={isFetching}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
