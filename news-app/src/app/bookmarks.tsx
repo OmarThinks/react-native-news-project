@@ -2,6 +2,7 @@ import { getNewsByIdQueryFn } from "@/api/newsApi";
 import { Header } from "@/components/Views/Header/Header";
 import SortButtonsAndSearchBar from "@/components/buttons/SortButtonsAndSearchBar";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
+import { BookmarksProvider } from "@/contexts/BookmarksContext";
 import useBookmarks from "@/redux/slices/bookmarks/bookmarksHooks";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
@@ -100,24 +101,26 @@ const Bookmarks = () => {
             timeSortingState={timeSorting}
             setTimeSortingState={setTimeSorting}
           />
-          <FlatList
-            data={loadedItems as NewsItemType[]}
-            renderItem={renderNewsCard}
-            keyExtractor={(item) => item?.id?.toString?.()}
-            ListEmptyComponent={() => (
-              <View
-                className=" self-stretch flex-1 justify-center items-center p-5"
-                style={{ backgroundColor: colors.background }}
-              >
-                <Text
-                  className=" font-bold text-[36px]"
-                  style={{ color: colors.text }}
+          <BookmarksProvider>
+            <FlatList
+              data={loadedItems as NewsItemType[]}
+              renderItem={renderNewsCard}
+              keyExtractor={(item) => item?.id?.toString?.()}
+              ListEmptyComponent={() => (
+                <View
+                  className=" self-stretch flex-1 justify-center items-center p-5"
+                  style={{ backgroundColor: colors.background }}
                 >
-                  No bookmarks found
-                </Text>
-              </View>
-            )}
-          />
+                  <Text
+                    className=" font-bold text-[36px]"
+                    style={{ color: colors.text }}
+                  >
+                    No bookmarks found
+                  </Text>
+                </View>
+              )}
+            />
+          </BookmarksProvider>
         </View>
       </View>
     </GestureHandlerRootView>

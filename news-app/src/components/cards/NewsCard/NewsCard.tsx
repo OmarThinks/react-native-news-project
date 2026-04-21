@@ -2,8 +2,12 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import React from "react";
+import React, { useMemo } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { toggleBookmark } from "@/redux/slices/bookmarks/bookmarksSlice";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useBookmarksContext } from "@/contexts/BookmarksContext";
 
 const NewsCard = ({
   newsItem,
@@ -17,6 +21,12 @@ const NewsCard = ({
     return null;
   }
 
+  const { bookmarkSet } = useBookmarksContext();
+
+  const isBookMarked = useMemo(
+    () => bookmarkSet.has(newsItem.id),
+    [bookmarkSet, newsItem.id],
+  );
   /*
   useEffect(() => {
     console.log("NewsCard rendered for id:", newsItem.id);
@@ -35,6 +45,11 @@ const NewsCard = ({
     if (diffInHours < 24) return `${diffInHours}h ago`;
     const diffInDays = Math.floor(diffInHours / 24);
     return `${diffInDays}d ago`;
+  };
+
+  const dispatch = useDispatch();
+  const _toggleBookmark = () => {
+    dispatch(toggleBookmark({ articleId: newsItem.id }));
   };
 
   return (
@@ -86,6 +101,19 @@ const NewsCard = ({
           >
             {newsItem.sourceDomain}
           </Text>
+          <TouchableOpacity
+            onPress={_toggleBookmark}
+            style={{
+              borderColor: colors.primary,
+            }}
+            className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
+          >
+            <MaterialCommunityIcons
+              name={isBookMarked ? "bookmark" : "bookmark-outline"}
+              size={20}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>

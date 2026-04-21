@@ -3,6 +3,7 @@ import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
 import SortButtonsAndSearchBar from "@/components/buttons/SortButtonsAndSearchBar";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
+import { BookmarksProvider } from "@/contexts/BookmarksContext";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
 import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
@@ -118,31 +119,33 @@ function Index() {
           timeSortingState={timeSorting}
           setTimeSortingState={setTimeSorting}
         />
-        <FlatList
-          data={loadedItems as NewsItemType[]}
-          renderItem={renderNewsCard}
-          keyExtractor={(item) => item?.id?.toString?.()}
-          onEndReached={nextPage}
-          onRefresh={refetch}
-          refreshing={isFetching}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            pending ? (
-              <View className="p-4">
-                <ActivityIndicator size="large" color={colors.primary} />
-              </View>
-            ) : loadedItems.length === data?.length ? (
-              <View className="p-4 self-stretch">
-                <Text
-                  style={{ color: colors.textSecondary }}
-                  className="text-center text-20px] font-medium"
-                >
-                  No more news to load
-                </Text>
-              </View>
-            ) : null
-          }
-        />
+        <BookmarksProvider>
+          <FlatList
+            data={loadedItems as NewsItemType[]}
+            renderItem={renderNewsCard}
+            keyExtractor={(item) => item?.id?.toString?.()}
+            onEndReached={nextPage}
+            onRefresh={refetch}
+            refreshing={isFetching}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={
+              pending ? (
+                <View className="p-4">
+                  <ActivityIndicator size="large" color={colors.primary} />
+                </View>
+              ) : loadedItems.length === data?.length ? (
+                <View className="p-4 self-stretch">
+                  <Text
+                    style={{ color: colors.textSecondary }}
+                    className="text-center text-20px] font-medium"
+                  >
+                    No more news to load
+                  </Text>
+                </View>
+              ) : null
+            }
+          />
+        </BookmarksProvider>
       </View>
     </View>
   );

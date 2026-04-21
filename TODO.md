@@ -5,6 +5,7 @@
 ## Summary:
 
 - Bookmarks ✅
+- card: add to bookmarks
 - Offline
 - Firebase auth again
 
