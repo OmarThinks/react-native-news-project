@@ -11,19 +11,11 @@ import { ActivityIndicator, FlatList, Text, View } from "react-native";
 function Index() {
   const colors = useColors();
 
-  const {
-    isLoading,
-    isFetching,
-    data,
-    isError,
-    error,
-    status,
-    refetch,
-    isRefetching,
-  } = useQuery({
-    queryKey: ["top-news"],
-    queryFn: getAllTopNewsQueryFn,
-  });
+  const { isLoading, isFetching, data, isError, error, status, refetch } =
+    useQuery({
+      queryKey: ["top-news"],
+      queryFn: getAllTopNewsQueryFn,
+    });
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -99,7 +91,7 @@ function Index() {
       <ErrorScreen
         error={error?.message ?? "An error occurred while fetching news."}
         refetch={refetch}
-        isRefetching={isRefetching}
+        isFetching={isFetching}
       />
     );
   }

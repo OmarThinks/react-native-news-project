@@ -4,11 +4,11 @@ import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 
 const ErrorScreen = ({
   refetch,
-  isRefetching,
+  isFetching,
   error,
 }: {
   refetch: () => void;
-  isRefetching: boolean;
+  isFetching: boolean;
   error?: string;
 }) => {
   const colors = useColors();
@@ -33,18 +33,18 @@ const ErrorScreen = ({
         </Text>
         <TouchableOpacity
           onPress={refetch}
-          disabled={isRefetching}
+          disabled={isFetching}
           className="px-6 py-3 rounded-lg"
           style={{
             backgroundColor: colors.primary,
-            opacity: isRefetching ? 0.6 : 1,
+            opacity: isFetching ? 0.6 : 1,
           }}
         >
           <Text
             className=" font-semibold text-center"
             style={{ color: colors.background }}
           >
-            {isRefetching ? "Retrying..." : "Try Again"}
+            {isFetching ? "Retrying..." : "Try Again"}
           </Text>
         </TouchableOpacity>
       </View>

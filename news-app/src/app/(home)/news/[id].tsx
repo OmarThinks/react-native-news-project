@@ -1,5 +1,6 @@
 import { getNewsByIdQueryFn } from "@/api/newsApi";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
+import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { CommentItemType } from "@/types/CommentItemType";
@@ -20,7 +21,7 @@ import {
 
 const NewsDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data, refetch, isFetching } = useQuery({
+  const { data, refetch, isFetching, status, error } = useQuery({
     queryKey: ["news-item", id],
     queryFn: () => getNewsByIdQueryFn<NewsItemType>(Number(id)),
   });
@@ -83,11 +84,22 @@ const NewsDetailsScreen = () => {
     });
   };
 
-  if (!data) {
+  if (status === "pending") {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        className="flex-1 justify-center items-center"
+        style={{ backgroundColor: colors.background }}
+      >
         <ActivityIndicator size="large" color={colors.primary} />
       </View>
+    );
+  } else if (status === "error") {
+    return (
+      <ErrorScreen
+        error={error?.message ?? "An error occurred while fetching news."}
+        refetch={refetch}
+        isFetching={isFetching}
+      />
     );
   }
 
