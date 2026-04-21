@@ -8,6 +8,7 @@ type NewsItemType = {
   title: string;
   type: "story";
   url: string;
+  sourceDomain: string;
   imageUrl: string;
 };
 

@@ -72,6 +72,13 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
               </Text>
             </View>
           </View>
+          <Text
+            className="text-sm mt-1"
+            style={{ color: colors.textSecondary }}
+            numberOfLines={1}
+          >
+            {newsItem.sourceDomain}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

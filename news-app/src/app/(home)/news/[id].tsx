@@ -144,6 +144,19 @@ const NewsDetailsScreen = () => {
           <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
             📅 {formatDate(data.time)}
           </Text>
+
+          <Text style={{ color: colors.textSecondary, fontSize: 12 }}>
+            🌐 {data.sourceDomain}
+          </Text>
+          <Text
+            style={{
+              color: colors.textSecondary,
+              fontSize: 12,
+              wordWrap: "wrap",
+            }}
+          >
+            🌐 {data.url}
+          </Text>
         </View>
 
         {/* URL Link */}
