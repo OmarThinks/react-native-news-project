@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAllBookmarks, toggleBookmark } from "./bookmarksSlice";
 
 const useBookmarks = () => {
-  const bookmarks = useSelector((state: RootState) => state.bookmarks);
+  const { bookmarks } = useSelector((state: RootState) => state.bookmarks);
   const dispatch = useDispatch();
 
   const _toggleBookmark = (articleId: number) => {

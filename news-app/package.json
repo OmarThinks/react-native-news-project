@@ -10,6 +10,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "test": "jest --watchAll",
+    "inspect-ts": "tsc",
     "prebuildAndroid": "expo prebuild --platform android",
     "buildAndroidLocally": "eas build --platform android --profile production --local",
     "buildAndroidLocallyAPK": "eas build --platform android --profile productionApk --local",

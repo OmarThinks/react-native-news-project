@@ -3,11 +3,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type BookmarksState = {
-  bookmarks: Set<number>;
+  bookmarks: number[];
 };
 
 const initialState: BookmarksState = {
-  bookmarks: new Set(),
+  bookmarks: [],
 };
 
 const bookmarksSlice = createSlice({
@@ -15,16 +15,16 @@ const bookmarksSlice = createSlice({
   initialState,
   reducers: {
     removeAllBookmarks: (state) => {
-      state.bookmarks = new Set();
+      state.bookmarks = [];
       AsyncStorage.removeItem(StorageKeysEnum.BOOKMARKS);
     },
 
     toggleBookmark: (state, action: PayloadAction<{ articleId: number }>) => {
       const articleId = action.payload.articleId;
-      if (state.bookmarks.has(articleId)) {
-        state.bookmarks.delete(articleId);
+      if (state.bookmarks.includes(articleId)) {
+        state.bookmarks = state.bookmarks.filter((id) => id !== articleId);
       } else {
-        state.bookmarks.add(articleId);
+        state.bookmarks.push(articleId);
       }
       AsyncStorage.setItem(
         StorageKeysEnum.BOOKMARKS,
@@ -37,10 +37,12 @@ const bookmarksSlice = createSlice({
         AsyncStorage.getItem(StorageKeysEnum.BOOKMARKS).then((value) => {
           if (value) {
             const bookmarksArray: number[] = JSON.parse(value);
-            state.bookmarks = new Set(bookmarksArray);
+            state.bookmarks = bookmarksArray;
           }
         });
-      } catch (error) {}
+      } catch (error) {
+        console.error("Error initializing bookmarks:", error);
+      }
     },
   },
 });

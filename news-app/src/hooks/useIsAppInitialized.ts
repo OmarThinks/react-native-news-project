@@ -1,10 +1,10 @@
 import { setUser } from "@/redux/slices/auth/authSlice";
+import { initializeBookMarks } from "@/redux/slices/bookmarks/bookmarksSlice";
 import { setThemeMode } from "@/redux/slices/themeSlice/themeSlice";
 import { useAppDispatch } from "@/redux/store";
 import { StorageKeysEnum } from "@/storage/StorageKeysEnum";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { initializeBookMarks } from "@/redux/slices/bookmarks/bookmarksSlice";
 
 const useIsAppInitialized = () => {
   const [isThemeInitialized, setIsThemeInitialized] = useState(false);

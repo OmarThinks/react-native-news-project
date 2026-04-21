@@ -2,6 +2,7 @@ import { getNewsByIdQueryFn } from "@/api/newsApi";
 import CommentCard from "@/components/cards/CommentCard/CommentCard";
 import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
+import useBookmarks from "@/redux/slices/bookmarks/bookmarksHooks";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { CommentItemType } from "@/types/CommentItemType";
 import { NewsItemType } from "@/types/NewsItemType";
@@ -27,6 +28,11 @@ const NewsDetailsScreen = () => {
     queryKey: ["news-item", id],
     queryFn: () => getNewsByIdQueryFn<NewsItemType>(Number(id)),
   });
+
+  const { bookmarks, toggleBookmark } = useBookmarks();
+  const isBookmarked = useMemo(() => {
+    return bookmarks.includes(Number(id));
+  }, [bookmarks, id]);
 
   const colors = useColors();
 
@@ -170,17 +176,8 @@ const NewsDetailsScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={async () => {
-              if (data.url) {
-                try {
-                  await Share.share({
-                    url: data.url,
-                    title: data.title,
-                  });
-                } catch (error) {
-                  console.error("Failed to share:", error);
-                }
-              }
+            onPress={() => {
+              toggleBookmark(Number(id));
             }}
             style={{
               borderColor: colors.primary,
@@ -188,7 +185,7 @@ const NewsDetailsScreen = () => {
             className=" rounded-full w-[45px] h-[45px] justify-center items-center border-[2px]"
           >
             <MaterialCommunityIcons
-              name="abacus"
+              name={isBookmarked ? "bookmark" : "bookmark-outline"}
               size={20}
               color={colors.primary}
             />
