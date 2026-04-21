@@ -18,9 +18,7 @@ exports[`CommentCard renders comment with HTML entities correctly 1`] = `
       }
     }
   >
-    This is a comment with 'single quotes' and 
-
-paragraphs
+    This is a comment with &#x27;single quotes&#x27; and &lt;p&gt;paragraphs&lt;/p&gt;
   </Text>
   <View
     className="flex-row justify-between items-center"

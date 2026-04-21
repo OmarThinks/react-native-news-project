@@ -4,9 +4,6 @@
 
 ## Summary:
 
-- Bookmarks ✅
-- card: add to bookmarks ✅
-- Offline ✅
 - Run tests
 - Firebase auth again
 
