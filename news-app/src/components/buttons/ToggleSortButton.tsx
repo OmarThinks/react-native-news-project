@@ -1,11 +1,8 @@
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { SortingEnum, type SortingEnumType } from "@/types/SortingEnum";
-import { SymbolView } from "expo-symbols";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import {
-    Text,
-    TouchableOpacity
-} from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 const ToggleSortButton = ({
   sortingState,
@@ -37,12 +34,12 @@ const ToggleSortButton = ({
   const getIcon = () => {
     switch (sortingState) {
       case SortingEnum.ASC:
-        return "arrow.up";
+        return "sort-ascending";
       case SortingEnum.DESC:
-        return "arrow.down";
+        return "sort-descending";
       case SortingEnum.NONE:
       default:
-        return "line.3.horizontal";
+        return "sort";
     }
   };
 
@@ -52,14 +49,14 @@ const ToggleSortButton = ({
     <TouchableOpacity
       onPress={onPress}
       className="flex flex-row items-center gap-2 rounded-lg px-3 py-2"
-      style={{ opacity: isActive ? 1 : 0.6 }}
+      style={{
+        opacity: isActive ? 1 : 0.6,
+        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: buttonColor,
+      }}
     >
-      <SymbolView
-        name={getIcon()}
-        size={18}
-        tintColor={buttonColor}
-        weight="semibold"
-      />
+      <MaterialCommunityIcons name={getIcon()} size={18} color={buttonColor} />
       <Text style={{ color: buttonColor }} className="font-semibold">
         {text}
       </Text>

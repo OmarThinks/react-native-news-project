@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
-import { router } from "expo-router";
 import { Image } from "expo-image";
+import { router } from "expo-router";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
 const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
   const colors = useColors();
@@ -33,7 +33,7 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
 
   return (
     <TouchableOpacity
-      className="p-4 m-2 rounded-lg shadow-sm"
+      className="p-4 my-2 rounded-lg shadow-sm"
       style={{ backgroundColor: colors.surface, borderColor: colors.border }}
       onPress={() => {
         // Handle press, e.g., open URL

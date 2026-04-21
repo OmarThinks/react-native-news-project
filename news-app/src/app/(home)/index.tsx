@@ -112,39 +112,41 @@ function Index() {
       style={{ backgroundColor: colors.background }}
     >
       <Header title="Top News" />
-      <SortButtonsAndSearchBar
-        textInputValue={searchText}
-        setTextInputValue={setSearchText}
-        scoreSortingState={scoreSorting}
-        setScoreSortingState={setScoreSorting}
-        timeSortingState={timeSorting}
-        setTimeSortingState={setTimeSorting}
-      />
-      <FlatList
-        data={loadedItems as NewsItemType[]}
-        renderItem={renderNewsCard}
-        keyExtractor={(item) => item?.id?.toString?.()}
-        onEndReached={nextPage}
-        onRefresh={refetch}
-        refreshing={isFetching}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={
-          pending ? (
-            <View className="p-4">
-              <ActivityIndicator size="large" color={colors.primary} />
-            </View>
-          ) : loadedItems.length === data?.length ? (
-            <View className="p-4 self-stretch">
-              <Text
-                style={{ color: colors.textSecondary }}
-                className="text-center text-20px] font-medium"
-              >
-                No more news to load
-              </Text>
-            </View>
-          ) : null
-        }
-      />
+      <View className=" self-stretch flex-1 px-2">
+        <SortButtonsAndSearchBar
+          textInputValue={searchText}
+          setTextInputValue={setSearchText}
+          scoreSortingState={scoreSorting}
+          setScoreSortingState={setScoreSorting}
+          timeSortingState={timeSorting}
+          setTimeSortingState={setTimeSorting}
+        />
+        <FlatList
+          data={loadedItems as NewsItemType[]}
+          renderItem={renderNewsCard}
+          keyExtractor={(item) => item?.id?.toString?.()}
+          onEndReached={nextPage}
+          onRefresh={refetch}
+          refreshing={isFetching}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            pending ? (
+              <View className="p-4">
+                <ActivityIndicator size="large" color={colors.primary} />
+              </View>
+            ) : loadedItems.length === data?.length ? (
+              <View className="p-4 self-stretch">
+                <Text
+                  style={{ color: colors.textSecondary }}
+                  className="text-center text-20px] font-medium"
+                >
+                  No more news to load
+                </Text>
+              </View>
+            ) : null
+          }
+        />
+      </View>
     </View>
   );
 }

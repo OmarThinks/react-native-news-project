@@ -1,8 +1,8 @@
-import { View, Text, TextInput } from "react-native";
-import React from "react";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
-import ToggleSortButton from "./ToggleSortButton";
 import { SortingEnum, type SortingEnumType } from "@/types/SortingEnum";
+import React from "react";
+import { TextInput, View } from "react-native";
+import ToggleSortButton from "./ToggleSortButton";
 
 const SortButtonsAndSearchBar = ({
   textInputValue,
@@ -33,7 +33,7 @@ const SortButtonsAndSearchBar = ({
           paddingVertical: 8,
           color: colors.text,
           borderColor: colors.border,
-          borderWidth: 1,
+          borderWidth: 2,
         }}
       />
       <View className=" self-stretch flex-row flex-wrap gap-2">
