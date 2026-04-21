@@ -9,8 +9,7 @@ import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { getFilteredAndSortedNews } from "@/utils/getFilteredAndSortedNews";
 import { useQueries } from "@tanstack/react-query";
 import React, { useCallback, useMemo, useState } from "react";
-import { FlatList, View, Animated } from "react-native";
-import { GestureDetector, Gesture } from "react-native-gesture-handler";
+import { FlatList, View } from "react-native";
 
 const Bookmarks = () => {
   const colors = useColors();
@@ -30,70 +29,11 @@ const Bookmarks = () => {
     },
   });
 
-  // Dummy function to handle item removal
-  const handleRemoveBookmark = useCallback((itemId: number | string) => {
-    console.log("Remove bookmark with ID:", itemId);
-    // Your removal logic will go here
-  }, []);
-
   const renderNewsCard = useCallback(
-    ({ item }: { item: NewsItemType }) => {
-      const translateX = new Animated.Value(0);
-
-      const pan = Gesture.Pan()
-        .onUpdate((event) => {
-          if (event.translationX < 0) {
-            translateX.setValue(Math.max(event.translationX, -120));
-          }
-        })
-        .onEnd((event) => {
-          if (event.translationX < -60) {
-            // Trigger removal
-            Animated.timing(translateX, {
-              toValue: -120,
-              duration: 200,
-              useNativeDriver: true,
-            }).start();
-            setTimeout(() => handleRemoveBookmark(item.id), 100);
-          } else {
-            // Snap back
-            Animated.spring(translateX, {
-              toValue: 0,
-              useNativeDriver: true,
-            }).start();
-          }
-        });
-
-      return (
-        <View style={{ overflow: "hidden" }}>
-          <View
-            style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: 120,
-              backgroundColor: "#ef4444",
-              justifyContent: "center",
-              alignItems: "flex-end",
-              paddingRight: 16,
-            }}
-          >
-            <View style={{ fontSize: 12, color: "white" }}>Delete</View>
-          </View>
-          <GestureDetector gesture={pan}>
-            <Animated.View
-              style={{
-                transform: [{ translateX }],
-              }}
-            >
-              <NewsCard newsItem={item} notPressable />
-            </Animated.View>
-          </GestureDetector>
-        </View>
-      );
-    },
-    [handleRemoveBookmark],
+    ({ item }: { item: NewsItemType }) => (
+      <NewsCard newsItem={item} notPressable />
+    ),
+    [],
   );
 
   const [searchText, setSearchText] = useState("");
