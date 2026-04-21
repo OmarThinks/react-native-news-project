@@ -4,8 +4,6 @@
 
 ## Summary:
 
-- Firebase auth again
-
 ## Screen 1:
 
 ## Screen 2: Article Detail:
@@ -17,11 +15,9 @@
 ## Bonus (optional — only attempt once the core is solid)
 
 - A search bar on Screen 1 with debounced filtering and no additional API calls.
-- On logout: reset bookmarks
 
 ## Finish:
 
-- try again with firebase auth, add db url as an empty string
 - iOS
 - docs
 - video
