@@ -4,7 +4,6 @@
 
 ## Summary:
 
-- Run tests
 - Firebase auth again
 
 ## Screen 1:
@@ -17,16 +16,12 @@
 
 ## Bonus (optional — only attempt once the core is solid)
 
-- A third Bookmarks tab (bottom tab navigator) showing saved stories with swipe-to-remove.
 - A search bar on Screen 1 with debounced filtering and no additional API calls.
-- An offline detection banner when the device has no connectivity.
 - On logout: reset bookmarks
 
 ## Finish:
 
 - try again with firebase auth, add db url as an empty string
-- test
-- revise the fields
 - iOS
 - docs
 - video
