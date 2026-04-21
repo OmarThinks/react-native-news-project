@@ -5,17 +5,16 @@ import { AppDispatch } from "@/redux/store";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/auth/authSlice";
 
 const Settings = () => {
   const colors = useColors();
 
   const [isSigningOut, setIsSigningOut] = React.useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const _signOut = () => {
-    if (isSigningOut) {
-      return;
-    }
-    setIsSigningOut(true);
+    dispatch(setUser(null));
   };
 
   return (

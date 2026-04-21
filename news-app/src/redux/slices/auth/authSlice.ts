@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StorageKeysEnum } from "@/storage/StorageKeysEnum";
 
 type AuthState = {
   user: object | null;
@@ -14,6 +16,15 @@ const authSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+      if (action.payload === null) {
+        AsyncStorage.removeItem(StorageKeysEnum.USER);
+        return;
+      } else {
+        AsyncStorage.setItem(
+          StorageKeysEnum.USER,
+          JSON.stringify(action.payload),
+        );
+      }
     },
   },
 });

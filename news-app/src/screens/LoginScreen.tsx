@@ -1,17 +1,21 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
-import React from "react";
+import { setUser } from "@/redux/slices/auth/authSlice";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const colors = useColors();
 
+  const dispatch = useDispatch();
+
   const handleSignIn = async () => {
     if (isLoading) {
       return;
     }
-
+    dispatch(setUser({ id: "123", name: "John Doe" }));
     setIsLoading(true);
   };
 
