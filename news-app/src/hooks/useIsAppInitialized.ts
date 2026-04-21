@@ -12,6 +12,7 @@ const useIsAppInitialized = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
+    console.log("Initializing bookmarks...");
     try {
       AsyncStorage.getItem(StorageKeysEnum.BOOKMARKS)
         .then((storedBookmarks) => {
