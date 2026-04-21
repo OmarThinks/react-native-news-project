@@ -10,8 +10,8 @@
   - Source Domain (parsed from the url)
   - Score
   - Relative Time
-- Pull to refresh
-- ActivityIndicator on first load
+- Pull to refresh ✅
+- ActivityIndicator on first load ✅
 - error state and empty state
 - sort toggle, by score or by time (Must survive navigation back)
 - Hacker News items have no thumbnails. Display a placeholder

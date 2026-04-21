@@ -3,18 +3,18 @@ import { Header } from "@/components/Views/Header/Header";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
-import { isPending } from "@reduxjs/toolkit";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
-import { ActivityIndicator, FlatList, View, Text } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 function Index() {
   const colors = useColors();
 
-  const { isLoading, isFetching, data, isError, error, status } = useQuery({
-    queryKey: ["top-news"],
-    queryFn: getAllTopNewsQueryFn,
-  });
+  const { isLoading, isFetching, data, isError, error, status, refetch } =
+    useQuery({
+      queryKey: ["top-news"],
+      queryFn: getAllTopNewsQueryFn,
+    });
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -66,6 +66,15 @@ function Index() {
     [],
   );
 
+  console.log(
+    "isFetching:",
+    isFetching,
+    "data length:",
+    data?.length,
+    newsItems?.length,
+    currentPage,
+  );
+
   return (
     <View
       className="flex-1 self-stretch"
@@ -77,6 +86,12 @@ function Index() {
         renderItem={renderNewsCard}
         keyExtractor={(item) => item?.id?.toString?.()}
         onEndReached={nextPage}
+        onRefresh={() => {
+          refetch().then(() => {
+            setCurrentPage(1);
+          });
+        }}
+        refreshing={isFetching}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           pending ? (
