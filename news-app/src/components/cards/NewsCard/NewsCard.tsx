@@ -5,7 +5,13 @@ import { router } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
+const NewsCard = ({
+  newsItem,
+  notPressable = false,
+}: {
+  newsItem: NewsItemType;
+  notPressable?: boolean;
+}) => {
   const colors = useColors();
   if (!newsItem) {
     return null;
@@ -40,6 +46,7 @@ const NewsCard = ({ newsItem }: { newsItem: NewsItemType }) => {
         //console.log("Open URL:", newsItem.url);
         router.push(`/news/${newsItem.id}`);
       }}
+      disabled={notPressable}
     >
       <View className=" self-stretch flex-row gap-2">
         <View style={{ width: 60, height: 60 }}>
