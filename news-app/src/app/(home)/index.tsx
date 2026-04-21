@@ -1,9 +1,11 @@
 import { getAllTopNewsQueryFn, getNewsByIdQueryFn } from "@/api/newsApi";
 import ErrorScreen from "@/components/ErrorScreen";
 import { Header } from "@/components/Views/Header/Header";
+import SortButtonsAndSearchBar from "@/components/buttons/SortButtonsAndSearchBar";
 import NewsCard from "@/components/cards/NewsCard/NewsCard";
 import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
 import { NewsItemType } from "@/types/NewsItemType";
+import { SortingEnum, SortingEnumType } from "@/types/SortingEnum";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
@@ -33,19 +35,6 @@ function Index() {
     },
   });
 
-  const loadedItems = useMemo(() => {
-    return newsItems.filter((item) => {
-      if (item == null) return false;
-      if (item == undefined) return false;
-      if (typeof item !== "object") return false;
-      if (!("title" in item)) return false;
-      if (!("url" in item)) return false;
-      if (!(item?.type === "story")) return false;
-
-      return true;
-    });
-  }, [newsItems]);
-
   const [lastNextPageTriggerTime, setLastNextPageTriggerTime] = useState(0);
 
   const nextPage = useCallback(() => {
@@ -66,6 +55,27 @@ function Index() {
     ({ item }: { item: NewsItemType }) => <NewsCard newsItem={item} />,
     [],
   );
+
+  const [searchText, setSearchText] = useState("");
+  const [scoreSorting, setScoreSorting] = useState<SortingEnumType>(
+    SortingEnum.NONE,
+  );
+  const [timeSorting, setTimeSorting] = useState<SortingEnumType>(
+    SortingEnum.NONE,
+  );
+
+  const loadedItems = useMemo(() => {
+    return newsItems.filter((item) => {
+      if (item == null) return false;
+      if (item == undefined) return false;
+      if (typeof item !== "object") return false;
+      if (!("title" in item)) return false;
+      if (!("url" in item)) return false;
+      if (!(item?.type === "story")) return false;
+
+      return true;
+    });
+  }, [newsItems]);
 
   /*
   console.log(
@@ -102,6 +112,14 @@ function Index() {
       style={{ backgroundColor: colors.background }}
     >
       <Header title="Top News" />
+      <SortButtonsAndSearchBar
+        textInputValue={searchText}
+        setTextInputValue={setSearchText}
+        scoreSortingState={scoreSorting}
+        setScoreSortingState={setScoreSorting}
+        timeSortingState={timeSorting}
+        setTimeSortingState={setTimeSorting}
+      />
       <FlatList
         data={loadedItems as NewsItemType[]}
         renderItem={renderNewsCard}

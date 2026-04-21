@@ -1,56 +1,70 @@
-import React, { useMemo } from "react";
-import { Text, View } from "react-native";
+import { useColors } from "@/redux/slices/themeSlice/colorsHooks";
+import { SortingEnum, type SortingEnumType } from "@/types/SortingEnum";
+import { SymbolView } from "expo-symbols";
+import React from "react";
+import {
+    Text,
+    TouchableOpacity
+} from "react-native";
 
 const ToggleSortButton = ({
-  options,
-  activeId,
-  defaultId,
-  setActiveId,
+  sortingState,
+  setSortingState,
   resetOtherSorts,
+  text,
 }: {
-  options: ToggleSortButtonItemType[];
-  activeId: number;
-  defaultId: number;
-  setActiveId: (newActiveId: number) => void;
+  sortingState: SortingEnumType;
+  setSortingState: (newActiveId: SortingEnumType) => void;
   resetOtherSorts: () => void;
+  text: string;
 }) => {
-  const isActive = activeId === defaultId;
-
-  let currentOptionIndex = useMemo(() => {
-    for (let index = 0; index < options.length; index++) {
-      const _option = options[index];
-      if (_option.id === activeId) {
-        return index;
-      }
-    }
-
-    return 0;
-  }, [options, activeId]);
+  const isActive = sortingState !== SortingEnum.NONE;
 
   const nextOptionIndex =
-    currentOptionIndex + 1 >= options.length ? 0 : currentOptionIndex + 1;
+    sortingState === SortingEnum.NONE
+      ? SortingEnum.ASC
+      : sortingState === SortingEnum.ASC
+        ? SortingEnum.DESC
+        : SortingEnum.NONE;
 
   const onPress = () => {
     resetOtherSorts();
-    setActiveId(nextOptionIndex);
+    setSortingState(nextOptionIndex);
   };
 
-  const currentObject: ToggleSortButtonItemType = useMemo(() => {
-    return options[0];
-  }, []);
+  const colors = useColors();
+
+  const getIcon = () => {
+    switch (sortingState) {
+      case SortingEnum.ASC:
+        return "arrow.up";
+      case SortingEnum.DESC:
+        return "arrow.down";
+      case SortingEnum.NONE:
+      default:
+        return "line.3.horizontal";
+    }
+  };
+
+  const buttonColor = isActive ? colors.primary : colors.text;
 
   return (
-    <View>
-      <Text>ToggleSortButton</Text>
-    </View>
+    <TouchableOpacity
+      onPress={onPress}
+      className="flex flex-row items-center gap-2 rounded-lg px-3 py-2"
+      style={{ opacity: isActive ? 1 : 0.6 }}
+    >
+      <SymbolView
+        name={getIcon()}
+        size={18}
+        tintColor={buttonColor}
+        weight="semibold"
+      />
+      <Text style={{ color: buttonColor }} className="font-semibold">
+        {text}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
-type ToggleSortButtonItemType = {
-  id: number;
-  iconName: string;
-  text: string;
-};
-
 export default ToggleSortButton;
-export type { ToggleSortButtonItemType };

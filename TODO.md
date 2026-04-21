@@ -2,7 +2,12 @@
 
 ✅
 
-## TODO:
+## Summary:
+
+- Search and sort
+- Bookmarks
+- Offline
+- Firebase auth again
 
 ## Screen 1:
 
