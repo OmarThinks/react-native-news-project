@@ -6,7 +6,7 @@ const lightColors: ThemeColorsType = {
   background: "#FFFFFF",
   surface: "#F4F4F5",
   text: "#000000",
-  textSecondary: "#F0F0F0",
+  textSecondary: "#404040",
   border: "#E4E4E7",
   error: "#EF4444",
 };

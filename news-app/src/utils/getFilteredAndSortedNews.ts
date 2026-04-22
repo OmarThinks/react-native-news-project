@@ -20,7 +20,10 @@ const getFilteredAndSortedNews = ({
     if (!("url" in item)) return false;
     if (!(item?.type === "story")) return false;
     if (!searchText) return true;
-    return item.title.toLowerCase().includes(searchText.toLowerCase());
+    return item.title
+      .trim()
+      .toLowerCase()
+      .includes(searchText.trim().toLowerCase());
   }) as NewsItemType[];
 
   if (scoreSorting === SortingEnum.NONE && timeSorting === SortingEnum.NONE) {

@@ -38,18 +38,14 @@ function Header({
         <TouchableOpacity
           className=" rounded-full self-stretch aspect-square justify-center items-center border"
           onPress={back}
-          style={{ borderColor: colors.textSecondary }}
+          style={{ borderColor: colors.text }}
         >
-          <FontAwesome6
-            name="chevron-left"
-            size={24}
-            color={colors.textSecondary}
-          />
+          <FontAwesome6 name="chevron-left" size={24} color={colors.text} />
         </TouchableOpacity>
       )}
 
       <Text
-        style={{ color: colors.textSecondary }}
+        style={{ color: colors.text }}
         className="flex-1 text-[24px] font-bold"
       >
         {title}
@@ -61,9 +57,9 @@ function Header({
           onPress={() => {
             router.navigate("/settings");
           }}
-          style={{ borderColor: colors.textSecondary }}
+          style={{ borderColor: colors.text }}
         >
-          <FontAwesome6 name="gear" size={24} color={colors.textSecondary} />
+          <FontAwesome6 name="gear" size={24} color={colors.text} />
         </TouchableOpacity>
       )}
 
