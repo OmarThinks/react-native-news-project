@@ -140,4 +140,4 @@ https://react-native-news-project-132068024308.europe-west1.run.app/ (But I'll t
 
 ## C-10) Testing:
 
-- Added test case
+- Added test cases and profiling for a component
