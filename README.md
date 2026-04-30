@@ -7,7 +7,6 @@
 A project that displays news from the Hacker News API
 
 - YouTube: https://www.youtube.com/watch?v=Ydq5bw8G43k
-- Deployment:  https://react-native-news-project-132068024308.europe-west1.run.app/ (But I'll take down the deployment after a few weeks, so that I don't keep paying the server)
 
 # B) Technologies Used:
 
